@@ -1,13 +1,15 @@
-<?php
-	require_once("func.php");
+<?php 
+	require_once("class.FeelingController.php"); 
+	require_once("class.PageController.php");
+	
+	$pc = new PageController();
+	$fc = new FeelingController();
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="func.js"></script>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<?php require_once("include.head.php"); ?>
 	<title>How I Feel</title>
 </head>
 <body>
@@ -22,7 +24,10 @@
 	</div>
 	
 	<div class="feelings-container">
-		<?php ShowLatestFeelers(); ?>
+		<?php 
+			$feelings = $fc->GetLatestFeelings();
+			$pc->ShowLatestFeelings($feelings); 
+		?>
 	</div>
 </div>
 

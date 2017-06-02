@@ -27,7 +27,7 @@ $(document).ready(function() {
 	});
 	
 	$('.feelings-container').on('click', '.feel', function(e) {
-		window.location.href = "discussion.php?id=" + $(this).data("id"); 
+		//window.location.href = "discussion.php?id=" + $(this).data("id"); 
 	});
 	
 	$('#feeling-submit').click(function(e) {

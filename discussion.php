@@ -1,29 +1,32 @@
 <?php
-	require_once("func.php");
+	require_once("class.FeelingController.php");
+	require_once("class.PageController.php");
+	$fc = new FeelingController();
+	$pc = new PageController();
+	
+	$feeling = null;
+	
 	if(isset($_GET['id'])) {
 		if(is_numeric($_GET['id'])) {
-			//Get feeler
-			$feeler = GetFeeler($_GET['id']);
+			$feeling = $fc->GetFeeling($_GET['id']);
 		}
 	}
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="func.js"></script>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<title>How I Feel</title>
+	<?php require_once("include.head.php"); ?>
+	<title>Discussion - How I Feel</title>
 </head>
 <body>
 <div class="container">
 	<div class="feelings-container f-c-discussion">
 		<?php
-			if($feeler == "0") {
+			if($feeling == null) {
 				echo "<h2>This discussion doesn't exist</h2>";
 			} else {
-				echo $feeler;
+				echo $feeling;
 			}
 		?>
 	</div>
