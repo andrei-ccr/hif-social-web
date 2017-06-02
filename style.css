@@ -1,0 +1,194 @@
+* {
+	font-family: "Raleway", sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	margin: 40px auto;
+	text-align: center;
+	width:70%;
+}
+
+#feeling-insert {
+	border: 1px solid #222; 
+	width:80%; 
+	padding:7px; 
+	font-size:20px;
+	padding-right: 55px;
+}
+
+#feeling-insert:focus {
+	outline-color: #00FF00;
+}
+
+#feeling-submit {
+	width: 50px;
+	height: 40px;
+	vertical-align: middle;
+	background-color: rgba(0,0,0,0);
+	border: 0;
+	font-size: 28px;
+	margin-left: -55px;
+	margin-top: -9px;
+	color: #222;
+}
+
+#feeling-submit:focus {
+	outline: 0;
+}
+
+#feeling-submit:hover{
+	color: #009900;
+	cursor: pointer;
+}
+#feeling-submit:active{
+	color: #00FF00;
+}
+
+#feeling-submit:after {
+	content: "\27A7";
+}
+
+#suggestion-container {
+	width: 80%; 
+	padding: 10px 0px; 
+	background-color: rgba(0,0,0,0); 
+	margin: 0; 
+	display: inline-block; 
+	text-align: left;
+	border:1px solid black;
+	border-top: 0;
+	display: none;
+}
+
+#suggestion-container #suggestions {
+	padding: 1px 7px;
+}
+
+#suggestion-container #suggestions ul {
+	list-style-type: none;
+}
+
+#suggestion-container #suggestions ul li {
+	padding: 8px;
+	cursor: pointer;
+}
+
+#suggestion-container #suggestions ul li:hover {
+	background-color: rgba(0,0,0,0.1);
+}
+
+.feelings-container {
+	margin: 80px auto;
+}
+
+.f-c-discussion {
+	margin-top: 20px;
+}
+
+.feelings-container h2 {
+	margin-bottom: 30px;
+}
+
+.feelings-container .feel {
+	width:50%; 
+	border: 1px solid rgba(0,0,0,0.2);
+	border-left: 0; border-right: 0;
+	margin:15px auto; 
+	font-size: 16px; 
+	text-align: left;
+	cursor: pointer;
+}
+
+.feelings-container .feel:hover {
+	border-color: rgba(0,200,0,0.8);
+}
+
+.feelings-container .feel .feel-body {
+	padding: 10px;
+}
+
+.feelings-container .feel .feel-body span:hover {
+	text-decoration: underline;
+	
+}
+.feelings-container .feel .feel-body img {
+	margin: 4px 15px 5px 5px;
+	vertical-align: middle;
+	width: 42px;
+	border: 1px solid rgba(0,0,0,0);
+}
+
+
+
+/* ========================================  DISCUSSION PAGE =========================================== */
+
+.discussion-container {
+	margin: 40px auto;
+	padding: 5px;
+	width: 80%;
+	text-align: left;
+}
+
+.discussion-container .comment {
+	padding: 20px;
+	border: 1px solid rgba(0,0,0,0.3);
+	letter-spacing: 1px;
+	margin: 10px 0px;
+	font-size: 14px;
+	line-height:20px;
+}
+
+.discussion-container .comment:hover {
+	border-color: #00EE00;
+}
+
+.discussion-container .comment span.username {
+	font-size: 12px; 
+	font-weight: bold; 
+	display: block;
+	cursor: pointer;
+	margin-top: -7px;
+	margin-bottom: 5px;
+}
+.discussion-container .comment span.username:hover {
+	text-decoration: underline;
+}
+
+.discussion-container #comment-insert {
+	width: 97%; 
+	resize: vertical; 
+	height:50px; 
+	display:inline-block; 
+	letter-spacing: 1px; 
+	line-height:20px; 
+	padding: 3px 7px;
+}
+
+.discussion-container #comment-insert:focus {
+	outline-color: #00EE00;
+}
+
+#comment-submit {
+	font-weight: bold; 
+	padding:10px 15px; 
+	vertical-align: middle; 
+	background-color: rgba(0,0,0,0); 
+	border: 1px solid rgba(0,0,0,0.2); 
+	font-size: 14px;
+	margin-top: 8px; margin-bottom: 15px;
+	color: #222;
+}
+
+#comment-submit:focus {
+	outline: 0;
+}
+
+#comment-submit:hover{
+	border-color: #00EE00;
+	cursor: pointer;
+}
+#comment-submit:active{
+	border-color: #007700;
+}
