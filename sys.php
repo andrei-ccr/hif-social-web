@@ -1,6 +1,6 @@
 <?php
-	require_once("class.PageController.php");
-	require_once("class.FeelingController.php");
+	require_once("Class/class.PageController.php");
+	require_once("Class/class.FeelingController.php");
 	
 	$pc = new PageController();
 	$fc = new FeelingController();
