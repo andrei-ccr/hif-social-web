@@ -1,6 +1,6 @@
 <?php 
-	require_once("class.FeelingController.php"); 
-	require_once("class.PageController.php");
+	require_once("Class/class.FeelingController.php"); 
+	require_once("Class/class.PageController.php");
 	
 	$pc = new PageController();
 	$fc = new FeelingController();
@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<?php require_once("include.head.php"); ?>
+	<?php require_once("Include/include.head.php"); ?>
 	<title>How I Feel</title>
 </head>
 <body>

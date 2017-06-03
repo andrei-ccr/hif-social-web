@@ -73,17 +73,17 @@
 		
 		public function GetFeeling($id) {
 			$q = "
-				SELECT f.feeling_id AS id, f.feeling AS feeling, u.username AS username, fl.time AS time
-				FROM feeling fl 
+				SELECT fl.feeling_id AS id, f.feeling AS feeling, u.username AS username, fl.time AS time
+				FROM feelings fl 
 				JOIN feels f ON fl.feel_id=f.id 
 				JOIN users u ON fl.user_id=u.user_id
-				WHERE fl.feeler_id = :feeler_id
+				WHERE fl.feeling_id = :feeler_id
 				";
 			$ps = $this->connection->prepare($q);
 			$ok = $ps->execute(array(":feeler_id" => $id));
 			
 			if($ok) {
-				$res = $ps->fetchAll(PDO::FETCH_ASSOC);
+				$res = $ps->fetch(PDO::FETCH_ASSOC);
 				if($res) 
 					return new Feeling($res['id'], $res['feeling'], $res['username'], $res['time']);
 				else
