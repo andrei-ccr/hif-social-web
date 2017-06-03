@@ -41,25 +41,29 @@ $(document).ready(function() {
 	});
 	
 	function ProccessFeeling() {
-		var feel = $('#feeling-insert').val();
-		console.log(feel);
-		var request = $.ajax({
-			url: "sys.php",
-			method: "POST",
-			data: { insert : feel },
-			dataType: "html"
-		});
-		 
-		request.done(function( list ) {
-			console.log(list);
-			GetLatestFeelings();
-		});
-		 
-		request.fail(function( jqXHR, textStatus ) {
-			console.log("Failed to register the feel");
-		});
-		$('#feeling-insert').val("");
-		$("#suggestion-container").hide();
+		var feel = $('#feeling-insert').val().trim();
+		if(!feel || 0 === feel.length) $('#feeling-insert').css("border-color", "red");
+		else {
+			$('#feeling-insert').css("border-color", "#222");
+			console.log(feel);
+			var request = $.ajax({
+				url: "sys.php",
+				method: "POST",
+				data: { insert : feel },
+				dataType: "html"
+			});
+			 
+			request.done(function( list ) {
+				console.log(list);
+				GetLatestFeelings();
+			});
+			 
+			request.fail(function( jqXHR, textStatus ) {
+				console.log("Failed to register the feel");
+			});
+			$('#feeling-insert').val("");
+			$("#suggestion-container").hide();
+		}
 	}
 	
 	function UpdateSuggestions() {
