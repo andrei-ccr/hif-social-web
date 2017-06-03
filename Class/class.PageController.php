@@ -49,7 +49,7 @@
 						</div>';
 				}
 			} else {
-				echo 'No comments here so far :(';
+				echo '<span style="display: block">No comments here so far :(</span>';
 			}
 		}
 	}

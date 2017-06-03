@@ -27,19 +27,51 @@ $(document).ready(function() {
 	});
 	
 	$('.feelings-container').on('click', '.feel', function(e) {
-		//window.location.href = "discussion.php?id=" + $(this).data("id"); 
+		window.location.href = "discussion.php?id=" + $(this).data("id"); 
 	});
+	
 	
 	$('#feeling-submit').click(function(e) {
 		ProccessFeeling();
 	});
 	
-	$(document).keypress(function(e) {
+	$('#feeling-submit').keypress(function(e) {
 		if(e.which == 13) {
 			ProccessFeeling();
 		}
 	});
 	
+	$('#comment-submit').on('click', function(e) {
+		ProccessComment();
+	});
+	$('#comment-submit').on('keypress', function(e) {
+		if(e.which == 13) {
+			ProccessComment();
+		}
+	});
+	
+	function ProccessComment()  {
+		var comment = $('#comment-insert').val().trim();
+		if(!comment || 0 === comment.length) { $('#comment.insert').css("border-color", "red"); }
+		else {
+			var fid = $('.feel').data("id"); //There will be only 1 feel so it's safe to do this, but should find a better way.
+			var request = $.ajax({
+				url: "sys.php",
+				method: "POST",
+				data: { insert_com : comment, feel_id : fid },
+				dataType: "html"
+			});
+			 
+			request.done(function( list ) {
+				console.log(list);
+				location.reload();
+			});
+			 
+			request.fail(function( jqXHR, textStatus ) {
+				console.log("Failed to register the comment");
+			});
+		}
+	}
 	function ProccessFeeling() {
 		var feel = $('#feeling-insert').val();
 		console.log(feel);

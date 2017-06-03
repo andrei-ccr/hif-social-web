@@ -6,6 +6,7 @@
 		private $dtime = "";
 		
 		function __construct($id, $feel, $name, $time) {
+			$this->id = $id;
 			$this->feel = $feel;
 			$this->name = $name;
 			$this->dtime = $time;

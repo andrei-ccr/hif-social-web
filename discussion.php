@@ -32,9 +32,15 @@
 	<?php 
 		//If the discussion doesn't exist, show latest feelings instead of displaying textarea
 		if($feeling != null) {
-			include("Include/include.discussionform.php");
+			echo '
+			<div class="discussion-container">
+			<textarea id="comment-insert" placeholder="Discuss about this..."autofocus></textarea>
+			<button id="comment-submit">Post</button>';
+			
 			$comments = $cc->GetComments($feeling);
 			$pc->ShowComments($comments);
+			
+			echo '</div>';
 		}
 	?>
 </div>
