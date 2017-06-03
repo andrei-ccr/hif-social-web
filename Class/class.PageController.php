@@ -1,5 +1,6 @@
 <?php
 	require_once("class.Feeling.php");
+	require_once("class.Comment.php");
 	
 	class PageController {
 		
@@ -27,6 +28,28 @@
 		public function ShowSuggestions($suggestions) {
 			foreach($suggestions as $s) {
 				echo '<li>'.$s.'</li>';
+			}
+		}
+		
+		public function ShowDiscussionFeeling($feeling) {
+			if($feeling == null) {
+				echo "<h2>This discussion doesn't exist :(</h2>";
+			} else {
+				echo $this->ShowFeeling($feeling);
+			}
+		}
+		
+		public function ShowComments($comments) {
+			if(count($comments) > 0 && $comments!=null) {
+				foreach($comments as $c) {
+					echo '
+						<div class="comment">
+							<span class="username">'.$c->GetName().'</span>
+							<p>'.$c->GetComment().'</p>
+						</div>';
+				}
+			} else {
+				echo '<span style="display: block">No comments here so far :(</span>';
 			}
 		}
 	}
