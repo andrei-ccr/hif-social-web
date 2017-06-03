@@ -35,18 +35,18 @@ $(document).ready(function() {
 		ProccessFeeling();
 	});
 	
-	$('#feeling-submit').keypress(function(e) {
-		if(e.which == 13) {
-			ProccessFeeling();
-		}
-	});
 	
 	$('#comment-submit').on('click', function(e) {
 		ProccessComment();
 	});
-	$('#comment-submit').on('keypress', function(e) {
+	
+	$(document).on('keypress', function(e) {
 		if(e.which == 13) {
-			ProccessComment();
+			if($('#comment-insert').length) {
+				ProccessComment();
+			} else if($('#feeling-insert').length) {
+				ProccessFeeling();
+			}
 		}
 	});
 	
