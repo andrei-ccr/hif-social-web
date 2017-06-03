@@ -5,7 +5,14 @@
 	class PageController {
 		
 		public function ShowFeeling($feeling) {
-			echo '<div class="feel" data-id="'.$feeling->GetId().'"><div class="feel-body"><img src="https://api.adorable.io/avatars/50/'.$feeling->GetTime().'.png"><b>'.$feeling->GetName().'</b> is feeling <span>'.$feeling->GetFeel().'</span></div></div>';
+			echo '
+				<div class="feel" data-id="'.$feeling->GetId().'">
+					<div class="feel-body">
+						<img src="https://api.adorable.io/avatars/50/'.$feeling->GetTime().'.png">
+						<b>'.$feeling->GetName().'</b> is feeling <span>'.$feeling->GetFeel().'</span>
+						<span style="font-size: 12px; display: block; text-align:right; color: gray;">Comments: '.$feeling->CountComments().'</span>
+					</div>
+				</div>';
 		}
 		
 		public function ShowFeelings($feelings) {

@@ -74,11 +74,13 @@
 		
 		public function GetFeeling($id) {
 			$q = "
-				SELECT fl.feeling_id AS id, f.feeling AS feeling, u.username AS username, fl.time AS time
+				SELECT COUNT(c.comment) AS numcom, fl.feeling_id AS id, f.feeling AS feeling, u.username AS username, fl.time AS time
 				FROM feelings fl 
 				JOIN feels f ON fl.feel_id=f.id 
 				JOIN users u ON fl.user_id=u.user_id
+				LEFT JOIN comments c ON fl.feeling_id = c.feeling_id
 				WHERE fl.feeling_id = :feeler_id
+                GROUP BY fl.feeling_id
 				";
 			$ps = $this->connection->prepare($q);
 			$ok = $ps->execute(array(":feeler_id" => $id));
@@ -86,7 +88,7 @@
 			if($ok) {
 				$res = $ps->fetch(PDO::FETCH_ASSOC);
 				if($res) 
-					return new Feeling($res['id'], $res['feeling'], $res['username'], $res['time']);
+					return new Feeling($res['id'], $res['feeling'], $res['username'], $res['time'], $res['numcom']);
 				else
 					return null;
 			} else {
@@ -103,10 +105,12 @@
 		
 		public function GetLatestFeelings($limit = 8) {
 			$q = "
-				SELECT fl.feeling_id AS id, f.feeling AS feeling, u.username AS username, fl.time AS time
+				SELECT COUNT(c.comment) AS numcom, fl.feeling_id AS id, f.feeling AS feeling, u.username AS username, fl.time AS time
 				FROM feelings fl 
 				JOIN feels f ON fl.feel_id=f.id 
 				JOIN users u ON fl.user_id=u.user_id
+				LEFT JOIN comments c ON fl.feeling_id = c.feeling_id
+				GROUP BY fl.feeling_id
 				ORDER BY fl.time DESC LIMIT :limit
 				";
 				
@@ -119,7 +123,7 @@
 				$res = $ps->fetchAll(PDO::FETCH_ASSOC);
 				if($res) {
 					foreach($res as $r) {
-						array_push($feeling_array, new Feeling($r['id'], $r['feeling'], $r['username'], $r['time']));
+						array_push($feeling_array, new Feeling($r['id'], $r['feeling'], $r['username'], $r['time'], $r['numcom']));
 					}
 				}
 				else

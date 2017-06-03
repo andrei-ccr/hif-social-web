@@ -7,7 +7,7 @@
 .container {
 	margin: 40px auto;
 	text-align: center;
-	width:70%;
+	width:80%;
 }
 
 #feeling-insert {
@@ -93,13 +93,15 @@
 }
 
 .feelings-container .feel {
-	width:50%; 
-	border: 1px solid rgba(0,0,0,0.2);
-	border-left: 0; border-right: 0;
-	margin:15px auto; 
-	font-size: 16px; 
-	text-align: left;
-	cursor: pointer;
+	width: 372px;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-left: 0;
+    border-right: 0;
+    margin: 15px 50px;
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+    display: inline-grid;
 }
 
 .feelings-container .feel:hover {
