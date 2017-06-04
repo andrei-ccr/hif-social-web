@@ -3,6 +3,24 @@
 	require_once("class.Comment.php");
 	
 	class PageController {
+		function GetTime($timestamp) {
+			$sec_elapsed = time() - strtotime($timestamp);
+			if($sec_elapsed >= (3600*24*25)) {
+				return "On " . date("Y-M-d", strtotime($timestamp));
+			}
+			else if($sec_elapsed >= (3600*24)) {
+				return round($sec_elapsed/(3600*24)) . " day(s) ago";
+			}
+			else if($sec_elapsed >= 3600) {
+				return round($sec_elapsed/3600) . " hour(s) ago";
+			}
+			else if($sec_elapsed >= 60) {
+				return round($sec_elapsed/60) . " minute(s) ago";
+			} 
+			else {
+				return $sec_elapsed . " second(s) ago";
+			}
+		}
 		
 		public function ShowFeeling($feeling) {
 			echo '
@@ -10,7 +28,9 @@
 					<div class="feel-body">
 						<img src="https://api.adorable.io/avatars/50/'.$feeling->GetTime().'.png">
 						<b>'.$feeling->GetName().'</b> is feeling <span class="feel-txt">'.$feeling->GetFeel().'</span>
-						<span style="font-size: 12px; display: block; text-align:right; color: gray; margin-top: -3px;">'.$feeling->CountComments().' comment(s)</span>
+						<div class="meta-info">
+							<div class="meta-info-time">'. $this->GetTime($feeling->GetTime()) .'</div>'. $feeling->CountComments().' comment(s)
+						</div>
 					</div>
 				</div>';
 		}
@@ -51,7 +71,8 @@
 				foreach($comments as $c) {
 					echo '
 						<div class="comment">
-							<span class="username">'.$c->GetName().'</span>
+							<img src="https://api.adorable.io/avatars/40/'. $c->GetTime() .'.png">
+							<span class="username">'.$c->GetName().'</span> <span class="timep">'.$this->GetTime($c->GetTime()).'</span>
 							<p>'.$c->GetComment().'</p>
 						</div>';
 				}

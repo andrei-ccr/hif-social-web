@@ -15,7 +15,7 @@
 		
 		public function GetComments($feeling) {
 			$q = "
-				SELECT c.comment AS comment, u.username AS username
+				SELECT c.comment AS comment, u.username AS username, c.time AS dtime
 				FROM comments c 
 				JOIN feelings f ON f.feeling_id=c.feeling_id
 				JOIN users u ON u.user_id=c.user_id
@@ -32,7 +32,7 @@
 				$res = $ps->fetchAll(PDO::FETCH_ASSOC);
 				if($res) {
 					foreach($res as $r) {
-						array_push($comments_array, new Comment($r['username'],  $r['comment']));
+						array_push($comments_array, new Comment($r['username'],  $r['comment'], $r['dtime']));
 					}
 				}
 				else

@@ -1,5 +1,9 @@
 $(document).ready(function() {
-	//GetLatestFeelings();
+	
+	if($(".f-c-discussion").length) {
+		$(".feel").css("cursor", "default");
+		$(".feel-txt").css("cursor", "pointer");
+	}
 	
 	$(document).click(function() {
 		$("#suggestion-container").hide();
@@ -27,7 +31,9 @@ $(document).ready(function() {
 	});
 	
 	$('.feelings-container').on('click', '.feel', function(e) {
-		window.location.href = "discussion.php?id=" + $(this).data("id"); 
+		if(!$(".f-c-discussion").length) {
+			window.location.href = "discussion.php?id=" + $(this).data("id"); 
+		}
 	});
 	$('.feelings-container').on('click', '.feel-txt', function(e) {
 		e.stopPropagation();
@@ -39,10 +45,10 @@ $(document).ready(function() {
 		ProccessFeeling();
 	});
 	
-	
 	$('#comment-submit').on('click', function(e) {
 		ProccessComment();
 	});
+	
 	
 	$(document).on('keypress', function(e) {
 		if(e.which == 13) {
@@ -53,6 +59,8 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+	
 	
 	function GetRelatedFeelings(ftxt) {
 		if(!$(".f-c-discussion").length) {

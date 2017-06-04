@@ -1,12 +1,35 @@
-@media screen and (min-width: 800px) {
-	.feel {
-		width: 50%;
-	}
-}
-
 @media screen and (max-width: 450px) {
 	#feeling-submit {
 		display: none;
+	}
+	
+	body .feelings-container .feel .feel-body {
+		text-align: center;
+	}
+	
+	body .feelings-container .feel .feel-body img {
+		display: block;
+		margin: 5px auto;
+		text-align: center;
+	}
+	
+	body .feelings-container .feel .feel-body .meta-info {
+		text-align: center;
+		margin-top: 8px;
+	}
+	
+	body .discussion-container .comment {
+		text-align: center;
+	}
+	
+	body .discussion-container .comment span.username {
+		margin-top: 8px;
+		display: block;
+	}
+	
+	body .discussion-container .comment img {
+		display: block;
+		margin: 1px auto;
 	}
 }
 
@@ -92,6 +115,11 @@
 	background-color: rgba(0,0,0,0.1);
 }
 
+
+
+
+/* ========================================  FEELINGS SECTION =========================================== */
+
 .feelings-container {
 	margin: 80px auto;
 }
@@ -131,6 +159,18 @@
 	padding: 10px;
 }
 
+.feelings-container .feel .feel-body .meta-info {
+	font-size: 12px; 
+	display: block; 
+	text-align:right; 
+	color: gray;
+}
+
+.feelings-container .feel .feel-body .meta-info .meta-info-time{
+	margin: 0px 15px; 
+	display:inline-block;
+}
+
 .feelings-container .feel .feel-body span:hover {
 	text-decoration: underline;
 	
@@ -139,7 +179,7 @@
 	margin: 4px 15px 5px 5px;
 	vertical-align: middle;
 	width: 42px;
-	border: 1px solid rgba(0,0,0,0);
+	border: 1px solid rgba(0,0,0,0.7);
 }
 
 
@@ -155,27 +195,41 @@
 
 .discussion-container .comment {
 	padding: 20px;
-	border: 1px solid rgba(0,0,0,0.3);
+	/*border: 1px solid rgba(0,0,0,0.3);*/
 	letter-spacing: 1px;
 	margin: 10px 0px;
 	font-size: 14px;
 	line-height:20px;
 }
 
-.discussion-container .comment:hover {
+/*.discussion-container .comment:hover {
 	border-color: #00EE00;
+}*/
+
+.discussion-container .comment img {
+	width: 32px; 
+	height: 32px; 
+	border: 1px solid gray; 
+	display: inline-block; 
+	vertical-align:middle;
 }
 
 .discussion-container .comment span.username {
 	font-size: 12px; 
 	font-weight: bold; 
-	display: block;
 	cursor: pointer;
 	margin-top: -7px;
 	margin-bottom: 5px;
+	display: inline-block;
 }
 .discussion-container .comment span.username:hover {
 	text-decoration: underline;
+}
+.discussion-container .comment span.timep {
+	font-size: 12px; 
+}
+.discussion-container .comment p {
+	margin-top: 10px;
 }
 
 .discussion-container #comment-insert {
@@ -192,6 +246,8 @@
 	outline-color: #00EE00;
 }
 
+
+
 #comment-submit {
 	font-weight: bold; 
 	padding:10px 15px; 
@@ -202,6 +258,7 @@
 	margin-top: 8px; margin-bottom: 15px;
 	color: #222;
 }
+
 
 #comment-submit:focus {
 	outline: 0;
