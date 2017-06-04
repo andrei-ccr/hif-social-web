@@ -29,6 +29,10 @@ $(document).ready(function() {
 	$('.feelings-container').on('click', '.feel', function(e) {
 		window.location.href = "discussion.php?id=" + $(this).data("id"); 
 	});
+	$('.feelings-container').on('click', '.feel-txt', function(e) {
+		e.stopPropagation();
+		GetRelatedFeelings($(this).text());
+	});
 	
 	
 	$('#feeling-submit').click(function(e) {
@@ -49,6 +53,29 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+	function GetRelatedFeelings(ftxt) {
+		if(!$(".f-c-discussion").length) {
+			var request = $.ajax({
+				url: "sys.php",
+				method: "POST",
+				data: { feel : ftxt },
+				dataType: "html"
+			});
+			 
+			request.done(function( list ) {
+				if($(".related-container").length) {
+					$(".related-container").html("<h2>Related feelings</h2>" + list);
+				} else {
+					$( ".feelings-container" ).prepend('<div class="related-container"><h2>Related feelings</h2>' + list + '</div>');
+				}				
+			});
+			 
+			request.fail(function( jqXHR, textStatus ) {
+				$( ".feelings-container" ).append( "Can't load related feelings :(" );
+			});
+		}
+	}
 	
 	function ProccessComment()  {
 		var comment = $('#comment-insert').val().trim();
@@ -87,6 +114,7 @@ $(document).ready(function() {
 			 
 			request.done(function( list ) {
 				console.log(list);
+				GetRelatedFeelings(feel);
 				GetLatestFeelings();
 			});
 			 
@@ -130,12 +158,15 @@ $(document).ready(function() {
 		});
 		 
 		request.done(function( list ) {
-		
-			$( ".feelings-container" ).html( list );
+			if($(".latest-container").length) {
+				$(".latest-container").html(list);
+			} else {
+				$( ".feelings-container" ).append('<div class="latest-container">' + list + '</div>' );
+			}
 		});
 		 
 		request.fail(function( jqXHR, textStatus ) {
-			$( ".feelings-container" ).html( "Can't load latest feelings :(" );
+			$( ".feelings-container" ).append( "Can't load latest feelings :(" );
 		});
 	}
 	

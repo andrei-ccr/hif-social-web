@@ -9,6 +9,24 @@
 		}
 		
 		
+		
+		public function GetFeelId($feel_text) {
+			$ps = $this->connection->prepare("SELECT id FROM feels WHERE feeling = :feeltxt LIMIT 1");
+			$ok = $ps->execute(array(":feeltxt" => $feel_text));
+			if($ok) {
+				$res = $ps->fetch(PDO::FETCH_ASSOC);
+				if($res) {
+					return $res['id'];
+				} else {
+					return 0;
+				}
+			} else {
+				return 0;
+			}
+		}
+		
+		
+		
 		/*
 			InsertFeel($feel_text)
 			
@@ -24,8 +42,6 @@
 			if(!$ok) return -1;
 			return $this->connection->lastInsertId();
 		}
-		
-		
 		
 		/*
 		
@@ -59,7 +75,7 @@
 			$ok = $ps->execute();
 			
 			if($ok) {
-				return true; //Success; Everything went well
+				return $this->connection->lastInsertId(); //Success; Everything went well
 			} else {
 				return false; //Query Failed;
 			}
@@ -96,7 +112,36 @@
 			}
 		}
 		
-		
+		public function GetRelatedFeelings($feel_id) {
+			$q = "
+				SELECT COUNT(c.comment) AS numcom, fl.feeling_id AS id, f.feeling AS feeling, u.username AS username, fl.time AS time
+				FROM feelings fl 
+				JOIN feels f ON fl.feel_id=f.id 
+				JOIN users u ON fl.user_id=u.user_id
+				LEFT JOIN comments c ON fl.feeling_id = c.feeling_id
+				WHERE fl.feel_id = :feel_id
+                GROUP BY fl.feeling_id
+				ORDER BY fl.time DESC LIMIT 8
+				";
+			$ps = $this->connection->prepare($q);
+			$ps->bindValue(":feel_id", (int)$feel_id,  PDO::PARAM_INT);
+			$ok = $ps->execute();
+			
+			$feeling_array = array();
+			
+			if($ok) {
+				$res = $ps->fetchAll(PDO::FETCH_ASSOC);
+				if($res) 
+					foreach($res as $r) {
+						array_push($feeling_array, new Feeling($r['id'], $r['feeling'], $r['username'], $r['time'], $r['numcom']));
+					}
+				else
+					return null;
+			} else {
+				return null;
+			}
+			return $feeling_array;
+		}
 		
 		/*
 			$limit - Optional; Specified the maximum number of latest feelings to retrieve. Default is 8. 

@@ -6,8 +6,9 @@
 	$fc = new FeelingController();
 ?>
 
+
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
 <head>
 	<?php require_once("Include/include.head.php"); ?>
 	<title>How I Feel</title>
@@ -25,7 +26,7 @@
 	
 	<div class="feelings-container">
 		<?php 
-			$feelings = $fc->GetLatestFeelings();
+			$feelings = $fc->GetLatestFeelings(6);
 			$pc->ShowLatestFeelings($feelings); 
 		?>
 	</div>

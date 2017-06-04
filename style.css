@@ -1,3 +1,15 @@
+@media screen and (min-width: 800px) {
+	.feel {
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 450px) {
+	#feeling-submit {
+		display: none;
+	}
+}
+
 * {
 	font-family: "Raleway", sans-serif;
 	margin: 0;
@@ -92,16 +104,23 @@
 	margin-bottom: 30px;
 }
 
+.feelings-container  .related-container {
+	margin: 30px auto;
+}
+
+.feelings-container  .latest-container {
+	margin: 30px auto;
+}
+
 .feelings-container .feel {
-	width: 372px;
+	width: 80%;
     border: 1px solid rgba(0,0,0,0.2);
     border-left: 0;
     border-right: 0;
-    margin: 15px 50px;
+    margin: 16px auto;
     font-size: 16px;
     text-align: left;
     cursor: pointer;
-    display: inline-grid;
 }
 
 .feelings-container .feel:hover {

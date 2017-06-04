@@ -16,11 +16,17 @@
 		$f = $fc->GetLatestFeelings(6);
 		$pc->ShowLatestFeelings($f);
 	} 
-	else if(isset($_POST['insert'])) {		//Adds a new feeling to the list
+	else if(isset($_POST['insert'])) {		//Adds a new feeling and echoes all related feelings
 		$res = $fc->InsertFeeling($_POST['insert']);
+		$fels = $fc->GetRelatedFeelings($fc->GetFeelId($_POST['insert']));
+		$pc->ShowFeelings($fels);
 	}
 	else if(isset($_POST['insert_com']) && isset($_POST['feel_id']) ) {		//Adds a new comment to the feeling
 		$res = $cc->InsertComment($_POST['insert_com'], $_POST['feel_id']);
 		if(!$res) echo "Com Ins Err";
+	}
+	else if(isset($_POST['feel'])) {    //Retrieves feelings related to the specified feel
+		$fels = $fc->GetRelatedFeelings($fc->GetFeelId($_POST['feel']));
+		$pc->ShowFeelings($fels);
 	}
 ?>

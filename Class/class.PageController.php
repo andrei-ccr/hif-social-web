@@ -9,8 +9,8 @@
 				<div class="feel" data-id="'.$feeling->GetId().'">
 					<div class="feel-body">
 						<img src="https://api.adorable.io/avatars/50/'.$feeling->GetTime().'.png">
-						<b>'.$feeling->GetName().'</b> is feeling <span>'.$feeling->GetFeel().'</span>
-						<span style="font-size: 12px; display: block; text-align:right; color: gray;">Comments: '.$feeling->CountComments().'</span>
+						<b>'.$feeling->GetName().'</b> is feeling <span class="feel-txt">'.$feeling->GetFeel().'</span>
+						<span style="font-size: 12px; display: block; text-align:right; color: gray; margin-top: -3px;">'.$feeling->CountComments().' comment(s)</span>
 					</div>
 				</div>';
 		}
