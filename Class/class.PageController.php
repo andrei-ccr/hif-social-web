@@ -4,7 +4,7 @@
 	
 	class PageController {
 		function GetTime($timestamp) {
-			$sec_elapsed = time() - strtotime($timestamp);
+			$sec_elapsed = time() - strtotime($timestamp) + 3600; //Important: Time is reported by PHP with -1 hour on this server, so I add 1 hour to the elapsed time to fix this.
 			if($sec_elapsed >= (3600*24*25)) {
 				return "On " . date("Y-M-d", strtotime($timestamp));
 			}
@@ -17,8 +17,11 @@
 			else if($sec_elapsed >= 60) {
 				return round($sec_elapsed/60) . " minute(s) ago";
 			} 
-			else {
+			else if($sec_elapsed >=5) {
 				return $sec_elapsed . " second(s) ago";
+			} 
+			else {
+				return "Few moments ago"; 
 			}
 		}
 		

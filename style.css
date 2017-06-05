@@ -3,6 +3,10 @@
 		display: none;
 	}
 	
+	body .feelings-container .feel {
+		width: 85%;
+	}
+	
 	body .feelings-container .feel .feel-body {
 		text-align: center;
 	}
@@ -141,7 +145,7 @@
 }
 
 .feelings-container .feel {
-	width: 80%;
+	width: 60%;
     border: 1px solid rgba(0,0,0,0.2);
     border-left: 0;
     border-right: 0;
@@ -247,8 +251,7 @@
 }
 
 
-
-#comment-submit {
+.discussion-container #comment-submit {
 	font-weight: bold; 
 	padding:10px 15px; 
 	vertical-align: middle; 
@@ -260,14 +263,14 @@
 }
 
 
-#comment-submit:focus {
+.discussion-container #comment-submit:focus {
 	outline: 0;
 }
 
-#comment-submit:hover{
+.discussion-container #comment-submit:hover{
 	border-color: #00EE00;
 	cursor: pointer;
 }
-#comment-submit:active{
+.discussion-container #comment-submit:active{
 	border-color: #007700;
 }
