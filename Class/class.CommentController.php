@@ -4,8 +4,19 @@
 
 	
 	class CommentController extends UserController {
-		function __construct() {
+		private $user = null;
+		private $loggedin = false;
+		
+		function __construct($user_obj = null) {
 			Parent::__construct();
+			if($user_obj != null) {
+				$res = $this->ValidateLogin($user_obj->GetUsername(), $user_obj->GetPassword());
+				if(is_object($res)) {
+					//Login is valid
+					$user = $res;
+					$loggedin = true;
+				}
+			}
 		}
 		
 		/*

@@ -9,12 +9,12 @@
 	
 	class UserController {
 		protected $connection = null;
-		protected $logedin = false;
-		protected $user = null; //User Object
+		private $logedin = false;
+		private $user = null; //User Object
 		
 		function __construct($u="", $p="") {
 			$this->connection = new PDO('mysql:dbname=feelingsdb;host=localhost', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
-			$res = $this->Login($u, $p);
+			$res = $this->ValidateLogin($u, $p);
 			if(is_object($res)) {
 				//If an object is returned, the login is successful
 				$logedin = true;
@@ -24,6 +24,14 @@
 	
 		function __destruct() {
 			$this->connection = null;
+		}
+		
+		public function IsLoggedIn() {
+			if($logedin) {
+				return $user;
+			} else {
+				return false;
+			}
 		}
 		
 		/*
@@ -48,7 +56,7 @@
 			return $suggestions;
 		}
 		
-		public function Login($username, $password) {
+		protected function ValidateLogin($username, $password) {
 			$username = trim($username);
 			$password = trim($password);
 			if(empty($username)) {
@@ -79,7 +87,7 @@
 			}
 		}
 		
-		public function Logout() {
+		private function Register($username, $password, $email) {
 			
 		}
 		

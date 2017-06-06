@@ -1,12 +1,14 @@
 <?php
+	require_once("Include/include.sessioninit.php");
+	
 	require_once("Class/class.PageController.php");
 	require_once("Class/class.FeelingController.php");
 	require_once("Class/class.CommentController.php");
 
 	
 	$pc = new PageController();
-	$fc = new FeelingController();
-	$cc = new CommentController();
+	$fc = new FeelingController($_SESSION['user']);
+	$cc = new CommentController($_SESSION['user']);
 	
 	if(isset($_POST['input'])) { 		//Populates the suggestion list with suggestions based on what is being typed
 		$s = $fc->GetSearchSuggestions($_POST['input']);

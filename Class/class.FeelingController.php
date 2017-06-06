@@ -4,8 +4,19 @@
 
 	
 	class FeelingController extends UserController {
+		private $user = null;
+		private $loggedin = false;
+		
 		function __construct() {
-			Parent::__construct();
+			Parent::__construct($user_obj = null);
+			if($user_obj != null) {
+				$res = $this->ValidateLogin($user_obj->GetUsername(), $user_obj->GetPassword());
+				if(is_object($res)) {
+					//Login is valid
+					$user = $res;
+					$loggedin = true;
+				}
+			}
 		}
 		
 		
