@@ -44,14 +44,14 @@
 }
 
 .container {
-	margin: 40px auto;
+	margin: 80px auto;
 	text-align: center;
 	width:80%;
 }
 
 #feeling-insert {
 	border: 1px solid #222; 
-	width:80%; 
+	width:70%; 
 	padding:7px; 
 	font-size:20px;
 	padding-right: 55px;
