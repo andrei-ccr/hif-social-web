@@ -30,7 +30,7 @@
 				<div class="feel" data-id="'.$feeling->GetId().'">
 					<div class="feel-body">
 						<img src="https://api.adorable.io/avatars/50/'.$feeling->GetTime().'.png">
-						<b>'.$feeling->GetName().'</b> is feeling <span class="feel-txt">'.$feeling->GetFeel().'</span>
+						<b>'.$feeling->GetUser()->GetUsername().'</b> is feeling <span class="feel-txt">'.$feeling->GetFeel().'</span>
 						<div class="meta-info">
 							<div class="meta-info-time">'. $this->GetTime($feeling->GetTime()) .'</div>'. $feeling->CountComments().' comment(s)
 						</div>
@@ -75,7 +75,7 @@
 					echo '
 						<div class="comment">
 							<img src="https://api.adorable.io/avatars/40/'. $c->GetTime() .'.png">
-							<span class="username">'.$c->GetName().'</span> <span class="timep">'.$this->GetTime($c->GetTime()).'</span>
+							<span class="username">'.$c->GetUser()->GetUsername().'</span> <span class="timep">'.$this->GetTime($c->GetTime()).'</span>
 							<p>'.$c->GetComment().'</p>
 						</div>';
 				}

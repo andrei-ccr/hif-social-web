@@ -10,6 +10,7 @@
 			$this->username = $u;
 			$this->pass = $p;
 			$this->email = $e;
+			
 		}
 		
 		public function GetId() {

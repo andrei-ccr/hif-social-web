@@ -26,7 +26,10 @@
 		
 		public function GetComments($feeling) {
 			$q = "
-				SELECT c.comment AS comment, u.username AS username, c.time AS dtime
+				SELECT c.comment AS comment, u.user_id AS user_id, 
+						u.username AS user_name,
+						u.pass AS user_pass,
+						u.email AS user_email, c.time AS dtime
 				FROM comments c 
 				JOIN feelings f ON f.feeling_id=c.feeling_id
 				JOIN users u ON u.user_id=c.user_id
@@ -43,7 +46,7 @@
 				$res = $ps->fetchAll(PDO::FETCH_ASSOC);
 				if($res) {
 					foreach($res as $r) {
-						array_push($comments_array, new Comment($r['username'],  $r['comment'], $r['dtime']));
+						array_push($comments_array, new Comment(new User($r['user_id'], $r['user_name'], $r['user_pass'], $r['user_email']),  $r['comment'], $r['dtime']));
 					}
 				}
 				else
@@ -55,12 +58,17 @@
 		}
 		
 
-		public function InsertComment($comment_txt, $feel_id, $user_id=1) {
-			$q = "INSERT INTO comments(comment, feeling_id, user_id) VALUES (:comment, :fid, :uid)";
-			$ps = $this->connection->prepare($q);
+		public function InsertComment($comment_txt, $feel_id) {
+			if($loggedin) {
+				$ps = $this->connection->prepare("INSERT INTO comments(comment, feeling_id, user_id) VALUES (:comment, :fid, :uid)");
+				$ps->bindValue(":uid" , (int)$user_id, PDO::PARAM_INT);
+			} else {
+				$ps = $this->connection->prepare("INSERT INTO comments(comment, feeling_id) VALUES (:comment, :fid)");
+			}
+			
 			$ps->bindValue(":comment", $comment_txt);
 			$ps->bindValue(":fid" , (int)$feel_id, PDO::PARAM_INT);
-			$ps->bindValue(":uid" , (int)$user_id, PDO::PARAM_INT);
+			
 			$ok = $ps->execute();
 			if($ok) return true;
 			else return false;
