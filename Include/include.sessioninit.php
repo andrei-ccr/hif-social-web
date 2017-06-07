@@ -1,4 +1,6 @@
 <?php
+	require_once("./Class/class.User.php");
+
 	session_start();
 	
 	//If any of the user session variables are not set, set them properly.

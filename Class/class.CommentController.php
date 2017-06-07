@@ -1,22 +1,14 @@
 <?php
 	require_once("class.Feeling.php");
+	require_once("class.Comment.php");
 	require_once("class.UserController.php");
 
 	
 	class CommentController extends UserController {
-		private $user = null;
-		private $loggedin = false;
 		
 		function __construct($user_obj = null) {
-			Parent::__construct();
-			if($user_obj != null) {
-				$res = $this->ValidateLogin($user_obj->GetUsername(), $user_obj->GetPassword());
-				if(is_object($res)) {
-					//Login is valid
-					$user = $res;
-					$loggedin = true;
-				}
-			}
+			if($user_obj === null) $user_obj = new AnonymousUser();
+			Parent::__construct($user_obj->GetUsername(), $user_obj->GetPassword());
 		}
 		
 		/*
@@ -59,9 +51,9 @@
 		
 
 		public function InsertComment($comment_txt, $feel_id) {
-			if($loggedin) {
+			if($this->loggedin) {
 				$ps = $this->connection->prepare("INSERT INTO comments(comment, feeling_id, user_id) VALUES (:comment, :fid, :uid)");
-				$ps->bindValue(":uid" , (int)$user_id, PDO::PARAM_INT);
+				$ps->bindValue(":uid" , (int)$this->user->GetId(), PDO::PARAM_INT);
 			} else {
 				$ps = $this->connection->prepare("INSERT INTO comments(comment, feeling_id) VALUES (:comment, :fid)");
 			}

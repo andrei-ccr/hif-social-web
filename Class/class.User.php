@@ -1,15 +1,23 @@
 <?php
 	class User {
-		private $id = 0;
-		private $username = "";
-		private $pass = "";
-		private $email = "";
+		protected $id = 0;
+		protected $username = "";
+		protected $pass = "";
+		protected $email = "";
 		
-		function __construct($i, $u, $p, $e) {
-			$this->id = $i;
-			$this->username = $u;
-			$this->pass = $p;
-			$this->email = $e;
+		function __construct($i=1, $u="", $p="", $e="") {
+			if($i == 1) {
+				$this->id = 1;
+				$this->username = "Anonymous";
+				$this->pass = "";
+				$this->email = "";
+			} else {
+				$this->id = $i;
+				$this->username = $u;
+				$this->pass = $p;
+				$this->email = $e;
+			}
+			
 			
 		}
 		
@@ -27,6 +35,14 @@
 		
 		public function GetEmail() {
 			return $this->email;
+		}
+
+		public function IsAnonymous() {
+			if($this->id == 1) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 ?>

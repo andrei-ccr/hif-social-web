@@ -63,5 +63,43 @@ $(document).ready(function() {
 	
 	//Clicking on submit button for comments
 	$('#comment-submit').on('click', ProccessComment);
+
+	$('#header-login-btn').on('click', function() {
+		var request = $.ajax({
+			url: "account_action.php",
+			method: "POST",
+			data: { username : "Jerry" , password : "1234" },
+			dataType: "html"
+		});
+		 
+		request.done(function( out ) {
+			console.log(out);
+			location.reload();
+		});
+		 
+		request.fail(function( jqXHR, textStatus ) {
+			console.log("Failed to login");
+		});
+
+	});
+
+	$('#header-logout-btn').on('click', function() {
+		var request = $.ajax({
+			url: "account_action.php",
+			method: "POST",
+			data: { logout: 1 },
+			dataType: "html"
+		});
+		 
+		request.done(function( out ) {
+			console.log(out);
+			location.reload();
+		});
+		 
+		request.fail(function( jqXHR, textStatus ) {
+			console.log("Failed to login");
+		});
+
+	});
 	
 });

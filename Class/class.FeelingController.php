@@ -1,23 +1,13 @@
 <?php
-	require_once("class.User.php");
-	require_once("class.Feeling.php");
-	require_once("class.UserController.php");
-
 	
+	require_once("class.UserController.php");
+	require_once("class.Feeling.php");
+
 	class FeelingController extends UserController {
-		private $user = null;
-		private $loggedin = false;
-		
-		function __construct($user_obj = null) {
-			Parent::__construct();
-			if($user_obj != null) {
-				$res = $this->ValidateLogin($user_obj->GetUsername(), $user_obj->GetPassword());
-				if(is_object($res)) {
-					//Login is valid
-					$user = $res;
-					$loggedin = true;
-				}
-			}
+
+		function __construct(User $user_obj = null) {
+			if($user_obj === null) $user_obj = new AnonymousUser();
+			Parent::__construct($user_obj->GetUsername(), $user_obj->GetPassword());
 		}
 		
 		
@@ -81,9 +71,9 @@
 				}
 			}
 				
-			if($loggedin) {
+			if($this->loggedin) {
 				$ps = $this->connection->prepare("INSERT INTO feelings(feel_id, user_id) VALUES(:fid, :uid)");
-				$ps->bindValue(":uid", (int)$user->GetId(), PDO::PARAM_INT);
+				$ps->bindValue(":uid", (int)$this->user->GetId(), PDO::PARAM_INT);
 			} else {
 				$ps = $this->connection->prepare("INSERT INTO feelings(feel_id) VALUES(:fid)");
 			}

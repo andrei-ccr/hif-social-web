@@ -19,8 +19,9 @@
 <div class="container">
 	<div id="header-login-container">
 		<?php
-			if($_SESSION['loggedin']) {
+			if($fc->IsLoggedIn()) {
 				echo $_SESSION['user']->GetUsername();
+				echo '<a href="account_action.php?logout=1">Logout</a>';
 			}
 			else {
 				echo '<button id="header-login-btn">Login</button>';

@@ -1,24 +1,26 @@
 <?php
 	require_once("class.User.php");
+	require_once("class.AnonymousUser.php");
 	
 	define("ERR_INVALID_USERNAME", -1);
 	define("ERR_INVALID_PASSWORD", -2);
+	define("ERR_INVALID_EMAIL", -5);
 	define("ERR_USERNOTFOUND", -3);
 	define("ERR_QUERY", -4);
 	define("SUCCESS_ACT", 0);
 	
 	class UserController {
 		protected $connection = null;
-		private $logedin = false;
-		private $user = null; //User Object
+		protected $loggedin = false;
+		protected $user = null; //User Object
 		
 		function __construct($u="", $p="") {
 			$this->connection = new PDO('mysql:dbname=feelingsdb;host=localhost', 'root', '', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
 			$res = $this->ValidateLogin($u, $p);
 			if(is_object($res)) {
 				//If an object is returned, the login is successful
-				$logedin = true;
-				$user = $res;
+				$this->loggedin = true;
+				$this->user = $res;
 			}
 		}
 	
@@ -27,8 +29,8 @@
 		}
 		
 		public function IsLoggedIn() {
-			if($logedin) {
-				return $user;
+			if($this->loggedin) {
+				return $this->user;
 			} else {
 				return false;
 			}
@@ -71,7 +73,7 @@
 				if($res) {
 					if(password_verify($password, $res['pass'])) {
 						//Password is valid. Login valid
-						return new User($res['user_id'], $res['username'], $res['pass'], $res['email']);
+						return new User($res['user_id'], $res['username'], $password, $res['email']);
 					} 
 					else {
 						//Invalid password
@@ -88,7 +90,44 @@
 		}
 		
 		private function Register($username, $password, $email) {
-			
+			$username = trim($username);
+			$password = trim($password);
+			$email = trim($email);
+
+			if(!ValidUsername($username)) {
+				return ERR_INVALID_USERNAME;
+			}
+
+			if(!ValidEmail($email)) {
+				return ERR_INVALID_EMAIL;
+			}
+
+			$p_hash = password_hash($password, PASSWORD_BCRYPT);
+
+			$this->connection->prepare("INSERT INTO users(username, pass, email) VALUES(:username, :password, :email)");
+			$ok = $ps->execute(array(":username"=>$username, ":password"=>$p_hash, ":email"=>$email));
+			if($ok) {
+				return new User($this->connection->lastInsertId(), $username, $p_hash, $email);
+			} else {
+				return ERR_QUERY;
+			}
+		}
+
+		private function ValidUsername($username) {
+			if(strlen($username) >= 30) {
+				return false;
+			}
+
+			//TODO: Write validation rules
+		}
+
+		private function ValidEmail($email) {
+			//According to RFC 5321
+			if(strlen($email) > 254) {
+				return false;
+			}
+
+			//TODO: Write validation rules
 		}
 		
 	}
