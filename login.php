@@ -1,28 +1,41 @@
-<?php
-	//This file would set SESSION variables to make user logged in.
-	//Note that if the username and password POST variables it receives are invalid, any current valid sessions will be overwriten by a new "not logged in" session.
-	
-	session_start();
-	
-	require_once("Class/class.User.php");
-	require_once("Class/class.UserController.php");
-	
-	if(isset($_POST['username']) && isset($_POST['password'])) {
-		$SESSION = array(); //Reset any session
-		$uc = new UserController($_POST['username'], $_POST['password']);
-		
-		if($u = $uc->IsLoggedIn()) {
-			//This means the username and password provided are valid
-			$_SESSION['user'] = $u;
-			$_SESSION['loggedin'] = true;
-		} else {
-			$_SESSION['user'] = null;
-			$_SESSION['loggedin'] = false;
-		}
-	}
-	
-	
-	
-	
 
-?>
+	<!DOCTYPE html>
+	<html lang="en-us">
+	<head>
+		<?php require_once("Include/include.head.php"); ?>
+		<title>Login - How I Feel</title>
+	</head>
+	<body>
+		<?php
+			if(isset($_GET['result'])) {
+				if(!$_GET['result']) {
+					if(isset($_GET['action'])) {
+						if($_GET['action'] == "login") {
+							echo '<b style="color: red;">Invalid username and password combination!</b>';
+						} else if($_GET['action'] == "reg") {
+							echo '<b style="color: red;">Could not create account! Invalid or duplicate information provided!</b>';
+						}
+					}
+				}
+			}
+			
+		?>
+		<h3>Login</h3>
+		<form action="account_action.php" method="POST">
+			<input type="hidden" name="action_login" value="1"/>
+			<input type="text" name="username" placeholder="Username"/>
+			<input type="password" name="password" placeholder="Password"/>
+			<input type="submit" name="submit" value="Log in"/>
+		</form>
+		<br>
+		<h3>Create a new account</h3>
+		<form action="account_action.php" method="POST">
+			<input type="hidden" name="action_register" value="1"/>
+			<input type="text" name="username" placeholder="Username"/>
+			<input type="password" name="password" placeholder="Password"/>
+			<input type="email" name="email" placeholder="Email"/>
+			<input type="submit" name="submit" value="Register"/>
+		</form>
+	</body>
+	</html>
+

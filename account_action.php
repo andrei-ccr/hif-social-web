@@ -6,7 +6,45 @@
 	
 	require_once("Class/class.User.php");
 	require_once("Class/class.UserController.php");
-	
+
+	if(isset($_POST['submit'])) {
+		//Data was submitted from a form
+		if(isset($_POST['action_login'])) {
+			//Action is to login
+			if(isset($_POST['username']) && isset($_POST['password'])) {
+				$_SESSION = array(); //Reset any session
+				$uc = new UserController($_POST['username'], $_POST['password']);
+				
+				if($u = $uc->IsLoggedIn()) {
+					//This means the username and password provided are valid
+					$_SESSION['user'] = $u;
+					$_SESSION['loggedin'] = true;
+					header("Location: /");
+					exit;
+				} else {
+					$_SESSION['user'] = null;
+					$_SESSION['loggedin'] = false;
+					header("Location: login.php?result=0&action=login");
+					exit;
+				}
+
+			}
+		} else if (isset($_POST['action_register'])) {
+			//Action is to register
+			if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email'])) {
+				$uc = new UserController();
+				$res = $uc->Register($_POST['username'], $_POST['password'], $_POST['email']);
+				if(is_object($res)) {
+					header("Location: /");
+					exit;
+				} else {
+					header("Location: login.php?result=0&action=reg");
+					exit;
+				}
+				
+			}
+		}
+	}/* else 
 	if(isset($_POST['username']) && isset($_POST['password'])) {
 		$_SESSION = array(); //Reset any session
 		$uc = new UserController($_POST['username'], $_POST['password']);
@@ -19,7 +57,7 @@
 			$_SESSION['user'] = null;
 			$_SESSION['loggedin'] = false;
 		}
-	} else if(isset($_POST['logout']) ) {
+	}*/ else if(isset($_POST['logout']) ) {
 		unset($_SESSION['user']);
 		unset($_SESSION['loggedin']);
 		$_SESSION = array();

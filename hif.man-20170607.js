@@ -65,7 +65,8 @@ $(document).ready(function() {
 	$('#comment-submit').on('click', ProccessComment);
 
 	$('#header-login-btn').on('click', function() {
-		var request = $.ajax({
+		window.location.href = "login.php";
+		/*var request = $.ajax({
 			url: "account_action.php",
 			method: "POST",
 			data: { username : "Jerry" , password : "1234" },
@@ -80,7 +81,7 @@ $(document).ready(function() {
 		request.fail(function( jqXHR, textStatus ) {
 			console.log("Failed to login");
 		});
-
+*/
 	});
 
 	$('#header-logout-btn').on('click', function() {

@@ -89,25 +89,25 @@
 			}
 		}
 		
-		private function Register($username, $password, $email) {
+		public function Register($username, $password, $email) {
 			$username = trim($username);
 			$password = trim($password);
 			$email = trim($email);
 
-			if(!ValidUsername($username)) {
+			if(!$this->ValidUsername($username)) {
 				return ERR_INVALID_USERNAME;
 			}
 
-			if(!ValidEmail($email)) {
+			if(!$this->ValidEmail($email)) {
 				return ERR_INVALID_EMAIL;
 			}
 
 			$p_hash = password_hash($password, PASSWORD_BCRYPT);
 
-			$this->connection->prepare("INSERT INTO users(username, pass, email) VALUES(:username, :password, :email)");
+			$ps = $this->connection->prepare("INSERT INTO users(username, pass, email) VALUES(:username, :password, :email)");
 			$ok = $ps->execute(array(":username"=>$username, ":password"=>$p_hash, ":email"=>$email));
 			if($ok) {
-				return new User($this->connection->lastInsertId(), $username, $p_hash, $email);
+				return new User($this->connection->lastInsertId(), $username, $password, $email);
 			} else {
 				return ERR_QUERY;
 			}
@@ -116,6 +116,8 @@
 		private function ValidUsername($username) {
 			if(strlen($username) >= 30) {
 				return false;
+			} else {
+				return true;
 			}
 
 			//TODO: Write validation rules
@@ -125,6 +127,8 @@
 			//According to RFC 5321
 			if(strlen($email) > 254) {
 				return false;
+			} else {
+				return true;
 			}
 
 			//TODO: Write validation rules
