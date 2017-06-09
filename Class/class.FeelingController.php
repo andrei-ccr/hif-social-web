@@ -1,13 +1,14 @@
 <?php
-	require_once("class.Feeling.php");
-	require_once("class.UserController.php");
-
 	
+	require_once("class.UserController.php");
+	require_once("class.Feeling.php");
+
 	class FeelingController extends UserController {
-		function __construct() {
-			Parent::__construct();
+
+		function __construct(User $user_obj = null) {
+			if($user_obj === null) $user_obj = new AnonymousUser();
+			Parent::__construct($user_obj->GetUsername(), $user_obj->GetPassword());
 		}
-		
 		
 		
 		public function GetFeelId($feel_text) {
@@ -70,7 +71,13 @@
 				}
 			}
 				
-			$ps = $this->connection->prepare("INSERT INTO feelings(feel_id) VALUES(:fid)");
+			if($this->loggedin) {
+				$ps = $this->connection->prepare("INSERT INTO feelings(feel_id, user_id) VALUES(:fid, :uid)");
+				$ps->bindValue(":uid", (int)$this->user->GetId(), PDO::PARAM_INT);
+			} else {
+				$ps = $this->connection->prepare("INSERT INTO feelings(feel_id) VALUES(:fid)");
+			}
+			
 			$ps->bindValue(":fid", (int)$feel_id,  PDO::PARAM_INT);
 			$ok = $ps->execute();
 			
@@ -90,7 +97,12 @@
 		
 		public function GetFeeling($id) {
 			$q = "
-				SELECT COUNT(c.comment) AS numcom, fl.feeling_id AS id, f.feeling AS feeling, u.username AS username, fl.time AS time
+				SELECT COUNT(c.comment) AS numcom, fl.feeling_id AS id, f.feeling AS feeling, 
+						u.user_id AS user_id, 
+						u.username AS user_name,
+						u.pass AS user_pass,
+						u.email AS user_email,
+						fl.time AS time
 				FROM feelings fl 
 				JOIN feels f ON fl.feel_id=f.id 
 				JOIN users u ON fl.user_id=u.user_id
@@ -98,13 +110,14 @@
 				WHERE fl.feeling_id = :feeler_id
                 GROUP BY fl.feeling_id
 				";
+
 			$ps = $this->connection->prepare($q);
 			$ok = $ps->execute(array(":feeler_id" => $id));
 			
 			if($ok) {
 				$res = $ps->fetch(PDO::FETCH_ASSOC);
 				if($res) 
-					return new Feeling($res['id'], $res['feeling'], $res['username'], $res['time'], $res['numcom']);
+					return new Feeling($res['id'], $res['feeling'], new User($res['user_id'], $res['user_name'], $res['user_pass'], $res['user_email']), $res['time'], $res['numcom']);
 				else
 					return null;
 			} else {
@@ -114,7 +127,10 @@
 		
 		public function GetRelatedFeelings($feel_id) {
 			$q = "
-				SELECT COUNT(c.comment) AS numcom, fl.feeling_id AS id, f.feeling AS feeling, u.username AS username, fl.time AS time
+				SELECT COUNT(c.comment) AS numcom, fl.feeling_id AS id, f.feeling AS feeling, u.user_id AS user_id, 
+						u.username AS user_name,
+						u.pass AS user_pass,
+						u.email AS user_email, fl.time AS time
 				FROM feelings fl 
 				JOIN feels f ON fl.feel_id=f.id 
 				JOIN users u ON fl.user_id=u.user_id
@@ -133,7 +149,7 @@
 				$res = $ps->fetchAll(PDO::FETCH_ASSOC);
 				if($res) 
 					foreach($res as $r) {
-						array_push($feeling_array, new Feeling($r['id'], $r['feeling'], $r['username'], $r['time'], $r['numcom']));
+						array_push($feeling_array, new Feeling($r['id'], $r['feeling'], new User($r['user_id'], $r['user_name'], $r['user_pass'], $r['user_email']), $r['time'], $r['numcom']));
 					}
 				else
 					return null;
@@ -150,7 +166,10 @@
 		
 		public function GetLatestFeelings($limit = 8) {
 			$q = "
-				SELECT COUNT(c.comment) AS numcom, fl.feeling_id AS id, f.feeling AS feeling, u.username AS username, fl.time AS time
+				SELECT COUNT(c.comment) AS numcom, fl.feeling_id AS id, f.feeling AS feeling, u.user_id AS user_id, 
+						u.username AS user_name,
+						u.pass AS user_pass,
+						u.email AS user_email, fl.time AS time
 				FROM feelings fl 
 				JOIN feels f ON fl.feel_id=f.id 
 				JOIN users u ON fl.user_id=u.user_id
@@ -168,7 +187,7 @@
 				$res = $ps->fetchAll(PDO::FETCH_ASSOC);
 				if($res) {
 					foreach($res as $r) {
-						array_push($feeling_array, new Feeling($r['id'], $r['feeling'], $r['username'], $r['time'], $r['numcom']));
+						array_push($feeling_array, new Feeling($r['id'], $r['feeling'], new User($r['user_id'], $r['user_name'], $r['user_pass'], $r['user_email']), $r['time'], $r['numcom']));
 					}
 				}
 				else

@@ -1,9 +1,11 @@
 <?php 
+	require_once("Include/include.sessioninit.php");
+	
 	require_once("Class/class.FeelingController.php"); 
 	require_once("Class/class.PageController.php");
 	
 	$pc = new PageController();
-	$fc = new FeelingController();
+	$fc = new FeelingController($_SESSION['user']);
 ?>
 
 
@@ -15,6 +17,17 @@
 </head>
 <body>
 <div class="container">
+	<div id="header-login-container">
+		<?php
+			if($fc->IsLoggedIn()) {
+				echo $_SESSION['user']->GetUsername();
+				echo '<a href="account_action.php?logout=1">Logout</a>';
+			}
+			else {
+				echo '<button id="header-login-btn">Login</button>';
+			}
+		?>
+	</div>
 	<input type="text" id="feeling-insert" placeholder="I feel ..." autofocus/>
 	<button id="feeling-submit"></button>
 	

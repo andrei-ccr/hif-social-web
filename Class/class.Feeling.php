@@ -2,14 +2,14 @@
 	class Feeling {
 		private $id = 0;
 		private $feel = "";
-		private $name = "";
+		private $user = null;
 		private $dtime = "";
 		private $nr_comments = 0;
 		
-		function __construct($id, $feel, $name, $time, $nr_comments) {
+		function __construct($id, $feel, $user, $time, $nr_comments) {
 			$this->id = $id;
 			$this->feel = $feel;
-			$this->name = $name;
+			$this->user = $user;
 			$this->dtime = $time;
 			$this->nr_comments = $nr_comments;
 		}
@@ -26,8 +26,8 @@
 			return $this->feel;
 		}
 		
-		public function GetName() {
-			return $this->name;
+		public function GetUser() {
+			return $this->user;
 		}
 		
 		public function GetTime() {

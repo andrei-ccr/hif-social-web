@@ -1,17 +1,17 @@
 <?php
 	class Comment {
-		private $name = "";
+		private $user = null;
 		private $comment = "";
 		private $dtime = "";
 		
-		function __construct($name, $comment, $time) {
-			$this->name = $name;
+		function __construct($user, $comment, $time) {
+			$this->user = $user;
 			$this->comment = $comment;
 			$this->dtime = $time;
 		}
 		
-		public function GetName() {
-			return $this->name;
+		public function GetUser() {
+			return $this->user;
 		}
 		
 		public function GetComment() {
