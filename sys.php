@@ -29,6 +29,7 @@
 	}
 	else if(isset($_POST['feel'])) {    //Retrieves feelings related to the specified feel
 		$fels = $fc->GetRelatedFeelings($fc->GetFeelId($_POST['feel']));
+		echo "<h3>Similar Feels &bull; ".count($fels)."</h3>";
 		$pc->ShowFeelings($fels);
 	}
 ?>

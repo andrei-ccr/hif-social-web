@@ -35,13 +35,18 @@
 		display: block;
 		margin: 1px auto;
 	}
+
+	body #header-acc-container {
+		margin: 1px auto;
+		text-align: center;
+	}
 }
 
-@media screen and (min-width: 1270px) {
+@media screen and (min-width: 1100px) {
 	body .feelings-container .feel {
 		display: inline-block;
 		width: 39%;
-		margin: 16px 59px;
+		margin: 16px 55px;
 	}
 	
 }
@@ -52,10 +57,15 @@
 	padding: 0;
 }
 
+html {
+	margin: 0;
+	padding: 0;
+}
+
 .container {
-	margin: 80px auto;
+	margin: 50px auto;
 	text-align: center;
-	width:90%;
+	width:95%;
 }
 
 #feeling-insert {
@@ -70,6 +80,15 @@
 	outline-color: #00FF00;
 }
 
+#feeling-insert:focus + #feeling-submit {
+	color: #5B5;
+	text-shadow:
+    -1px -1px 1px #AFA,
+    1px -1px 1px #AFA,
+    -1px 1px 1px #AFA,
+    1px 1px 1px #AFA;  
+}
+
 #feeling-submit {
 	width: 50px;
 	height: 40px;
@@ -79,7 +98,7 @@
 	font-size: 28px;
 	margin-left: -55px;
 	margin-top: -9px;
-	color: #222;
+	color: #777;
 }
 
 #feeling-submit:focus {
@@ -135,7 +154,12 @@
 
 .feelings-container {
 	margin: 80px auto;
+	margin-bottom:60px;
 	text-align:center;
+}
+
+.feelings-container h3 {
+	font-size:21px; margin-bottom: 15px;
 }
 
 .f-c-discussion {
@@ -143,32 +167,27 @@
 	display: block;
 }
 
-.feelings-container h2 {
-	margin-bottom: 30px;
-}
-
-.feelings-container  .related-container {
+.feelings-container  .f-related-container {
 	margin: 30px auto;
 }
 
-.feelings-container  .latest-container {
+.feelings-container  .f-latest-container {
 	margin: 30px auto;
 }
 
 .feelings-container .feel {
 	width: 60%;
-    border: 1px solid rgba(0,0,0,0.2);
+    border: 1px solid rgba(0,0,0,0.1);
     border-left: 0;
     border-right: 0;
     margin: 16px auto;
     font-size: 16px;
     text-align: left;
     cursor: pointer;
-    
 }
 
 .feelings-container .feel:hover {
-	border-color: rgba(0,200,0,0.8);
+	border-color: rgba(0,200,0,0.5);
 }
 
 .feelings-container .feel .feel-body {
@@ -178,12 +197,12 @@
 .feelings-container .feel .feel-body .meta-info {
 	font-size: 12px; 
 	display: block; 
-	text-align:right; 
+	text-align:left; 
 	color: gray;
 }
 
 .feelings-container .feel .feel-body .meta-info .meta-info-time{
-	margin: 0px 15px; 
+	margin: 3px 15px 0px 0px; 
 	display:inline-block;
 }
 
@@ -192,7 +211,7 @@
 	
 }
 .feelings-container .feel .feel-body img {
-	margin: 4px 15px 5px 5px;
+	margin: 4px 10px 5px 5px;
 	vertical-align: middle;
 	width: 42px;
 	border: 1px solid rgba(0,0,0,0.7);
@@ -202,17 +221,56 @@
 
 /* ========================================  DISCUSSION PAGE =========================================== */
 
+.nfeel {
+	width: 60%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-left: 0;
+    border-right: 0;
+    margin: 16px auto;
+    font-size: 16px;
+    text-align: left;
+}
+
+.nfeel .feel-body {
+	padding: 10px;
+}
+
+.nfeel .feel-body .meta-info {
+	font-size: 12px; 
+	display: block; 
+	text-align:left; 
+	color: gray;
+}
+
+.nfeel .feel-body .meta-info .meta-info-time{
+	margin: 3px 15px 0px 0px; 
+	display:inline-block;
+}
+
+.nfeel .feel-body span:hover {
+	text-decoration: underline;
+	
+}
+
+.nfeel .feel-body img {
+	margin: 4px 10px 5px 5px;
+	vertical-align: middle;
+	width: 35px;
+	border: 1px solid rgba(0,0,0,0.7);
+}
+
+
 .discussion-container {
-	margin: 40px 40px;
-	padding: 5px;
-	width: 50%;
+	margin: 40px 0px;
+	padding: 0px;
+	width: 60%;
 	text-align: left;
 	display: inline-block;
 	vertical-align: top;
 }
 
 .discussion-container .comment {
-	padding: 20px;
+	padding: 10px 1px;
 	/*border: 1px solid rgba(0,0,0,0.3);*/
 	letter-spacing: 1px;
 	margin: 10px 0px;
@@ -225,11 +283,12 @@
 }*/
 
 .discussion-container .comment img {
-	width: 32px; 
-	height: 32px; 
-	border: 1px solid gray; 
-	display: inline-block; 
-	vertical-align:middle;
+	width: 25px;
+    height: 25px;
+    border: 1px solid gray;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 4px;
 }
 
 .discussion-container .comment span.username {
@@ -247,21 +306,23 @@
 	font-size: 12px; 
 }
 .discussion-container .comment p {
-	margin-top: 10px;
+	margin-top: 4px;
+    font-size: 12px;
 }
 
 .discussion-container #comment-insert {
-	width: 87%; 
+	width: 95%; 
 	resize: vertical; 
 	height:50px; 
 	display:block; 
 	letter-spacing: 1px; 
 	line-height:20px; 
 	padding: 3px 7px;
+	border-color: #777;
 }
 
 .discussion-container #comment-insert:focus {
-	outline-color: #00EE00;
+	outline-color: #00DD00;
 }
 
 
@@ -282,16 +343,16 @@
 }
 
 .discussion-container #comment-submit:hover{
-	border-color: #00EE00;
+	border-color: #00CC00;
 	cursor: pointer;
 }
 .discussion-container #comment-submit:active{
 	border-color: #007700;
 }
 
-<<<<<<< HEAD
+
 .related-container {
-	width:40%;
+	width:39%;
 	display:inline-block;
 }
 .related-container .feel {
@@ -317,12 +378,12 @@
 .related-container .feel .feel-body .meta-info {
 	font-size: 12px; 
 	display: block; 
-	text-align:right; 
+	text-align:left; 
 	color: gray;
 }
 
 .related-container .feel .feel-body .meta-info .meta-info-time{
-	margin: 0px 15px; 
+	margin: 3px 15px 0px 0px; 
 	display:inline-block;
 }
 
@@ -331,41 +392,46 @@
 	
 }
 .related-container .feel .feel-body img {
-	margin: 4px 15px 5px 5px;
+	margin: 4px 10px 5px 5px;
 	vertical-align: middle;
 	width: 42px;
 	border: 1px solid rgba(0,0,0,0.7);
-=======
-/* =============================== Login Section ==================================== */
-
-#header-login-container {
-	position: absolute; 
-	top: 10px; 
-	right: 10px; 
-	width: 70px; 
-	height: 35px;
 }
 
-#header-login-container #header-login-btn {
+.related-container h3 {
+	font-size:21px; margin-bottom: 15px;
+}
+/* =============================== Login Section ==================================== */
+
+#header-acc-container {
+
+	width: 99%; 
+	padding: 1px;
+	text-align: right;
+}
+
+#header-acc-container .header-btn {
 	background-color: rgba(230,230,230,0); 
-	width: 100%; 
-	height: 100%; 
-	border: 1px solid rgba(0,0,0,0.5);
-	border-left: 0; border-right: 0;
+	width: 70px; 
+	height: 35px; 
+	/*border: 1px solid rgba(0,0,0,0.5);*/
+	border: 0;
 	cursor: pointer; 
 	font-weight: bold; 
 	font-size: 12px;
+	margin: 10px 10px 0px 10px;
+
 }
 
-#header-login-container #header-login-btn:focus {
+#header-acc-container .header-btn:focus {
 	outline: 0;
 }
 
-#header-login-container #header-login-btn:hover {
+#header-acc-container .header-btn:hover {
 	background-color: rgba(230,230,230,0.3);
 }
 
-#header-login-container #header-login-btn:active {
+#header-acc-container .header-btn:active {
 	background-color: rgba(230,230,230,0.7);
->>>>>>> feat/accounts
+
 }

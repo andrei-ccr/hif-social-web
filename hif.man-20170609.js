@@ -1,14 +1,5 @@
 $(document).ready(function() {
-	
-	if(IsDiscussionPage()) {
-		// If the current page is the discussion page
-		if($(".feel").hasClass("feel-related") === true) {
-			$(this).css("cursor", "auto");
-			$(this).hover(function() { $(this).css("border-color", "rgba(0,0,0,0.2)"); });
-			$(".feel-txt").css("cursor", "pointer");
-		}
 		
-	}
 	
 	$(document).on('click', function() {
 		$("#suggestion-container").hide();
@@ -66,5 +57,48 @@ $(document).ready(function() {
 	
 	//Clicking on submit button for comments
 	$('#comment-submit').on('click', ProccessComment);
+
+	$('#header-login-btn').on('click', function() {
+		window.location.href = "login.php";
+		/*var request = $.ajax({
+			url: "account_action.php",
+			method: "POST",
+			data: { username : "Jerry" , password : "1234" },
+			dataType: "html"
+		});
+		 
+		request.done(function( out ) {
+			console.log(out);
+			location.reload();
+		});
+		 
+		request.fail(function( jqXHR, textStatus ) {
+			console.log("Failed to login");
+		});
+*/
+	});
+
+	$('#header-logout-btn').on('click', function() {
+		var request = $.ajax({
+			url: "account_action.php",
+			method: "POST",
+			data: { logout: 1 },
+			dataType: "html"
+		});
+		 
+		request.done(function( out ) {
+			console.log(out);
+			location.reload();
+		});
+		 
+		request.fail(function( jqXHR, textStatus ) {
+			console.log("Failed to login");
+		});
+
+	});
+
+	$('#header-user-btn').on('click', function() {
+		window.location.href = "/"; 
+	});
 	
 });

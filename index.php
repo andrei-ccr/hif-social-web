@@ -16,18 +16,10 @@
 	<title>How I Feel</title>
 </head>
 <body>
+<?php require_once("Include/include.header.php"); ?>
+
 <div class="container">
-	<div id="header-login-container">
-		<?php
-			if($fc->IsLoggedIn()) {
-				echo $_SESSION['user']->GetUsername();
-				echo '<a href="account_action.php?logout=1">Logout</a>';
-			}
-			else {
-				echo '<button id="header-login-btn">Login</button>';
-			}
-		?>
-	</div>
+	
 	<input type="text" id="feeling-insert" placeholder="I feel ..." autofocus/>
 	<button id="feeling-submit"></button>
 	
@@ -38,10 +30,12 @@
 	</div>
 	
 	<div class="feelings-container">
-		<?php 
-			$feelings = $fc->GetLatestFeelings(6);
-			$pc->ShowLatestFeelings($feelings); 
-		?>
+		<div class="f-latest-container">
+			<?php 
+				$feelings = $fc->GetLatestFeelings(8);
+				$pc->ShowLatestFeelings($feelings); 
+			?>
+		</div>
 	</div>
 </div>
 

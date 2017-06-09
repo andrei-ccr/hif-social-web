@@ -13,10 +13,10 @@ function GetRelatedFeelings(ftxt) {
 		});
 		 
 		request.done(function( list ) {
-			if($(".related-container").length) {
-				$(".related-container").html("<h2>Related feelings</h2>" + list);
+			if($(".f-related-container").length) {
+				$(".f-related-container").html(list);
 			} else {
-				$( ".feelings-container" ).prepend('<div class="related-container"><h2>Related feelings</h2>' + list + '</div>');
+				$( ".feelings-container" ).prepend('<div class="f-related-container">' + list + '</div>');
 			}				
 		});
 		 
@@ -107,10 +107,10 @@ function GetLatestFeelings() {
 	});
 	 
 	request.done(function( list ) {
-		if($(".latest-container").length) {
-			$(".latest-container").html(list);
+		if($(".f-latest-container").length) {
+			$(".f-latest-container").html(list);
 		} else {
-			$( ".feelings-container" ).append('<div class="latest-container">' + list + '</div>' );
+			$( ".feelings-container" ).append('<div class="f-latest-container">' + list + '</div>' );
 		}
 	});
 	 

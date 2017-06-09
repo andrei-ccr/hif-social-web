@@ -25,9 +25,10 @@
 			}
 		}
 		
-		public function ShowFeeling($feeling) {
+		public function ShowFeeling($feeling, $non_clickable=false) {
+			$c = ($non_clickable)?"nfeel":"feel";
 			echo '
-				<div class="feel" data-id="'.$feeling->GetId().'">
+				<div class="'.$c.'" data-id="'.$feeling->GetId().'">
 					<div class="feel-body">
 						<img src="https://api.adorable.io/avatars/50/'.$feeling->GetTime().'.png">
 						<b>'.$feeling->GetUser()->GetUsername().'</b> is feeling <span class="feel-txt">'.$feeling->GetFeel().'</span>
@@ -48,7 +49,7 @@
 		
 		public function ShowLatestFeelings($feelings) {
 			if(count($feelings) > 0 && $feelings!=null) {
-				echo '<h2>Latest Feelings</h2>';
+				echo '<h3>Most Recent</h3>';
 				$this->ShowFeelings($feelings);
 			} else {
 				echo 'No feelings at this time :|';
@@ -65,7 +66,7 @@
 			if($feeling == null) {
 				echo "<h2>This discussion doesn't exist :(</h2>";
 			} else {
-				echo $this->ShowFeeling($feeling);
+				echo $this->ShowFeeling($feeling, true);
 			}
 		}
 		

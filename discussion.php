@@ -1,11 +1,13 @@
 <?php
+	require_once("Include/include.sessioninit.php");
+
 	require_once("Class/class.FeelingController.php");
 	require_once("Class/class.PageController.php");
 	require_once("Class/class.CommentController.php");
 	
-	$fc = new FeelingController();
+	$fc = new FeelingController($_SESSION['user']);
 	$pc = new PageController();
-	$cc = new CommentController();
+	$cc = new CommentController($_SESSION['user']);
 	
 	$feeling = null;
 	
@@ -17,12 +19,13 @@
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
 <head>
 	<?php require_once("Include/include.head.php"); ?>
 	<title>Discussion - How I Feel</title>
 </head>
 <body>
+<?php require_once("Include/include.header.php"); ?>
 <div class="container">
 	<div class="feelings-container f-c-discussion">
 		<?php
@@ -44,43 +47,25 @@
 		}
 	?>
 	<div class="related-container">
-		<h3>Related Feelings</h3>
-		<div class="feel feel-related" data-id="36">
-			<div class="feel-body">
-				<img src="https://api.adorable.io/avatars/50/2017-06-08 16:55:27.png">
-				<b>Anonymous</b> is feeling <span class="feel-txt" style="cursor: pointer;">good</span>
-				<div class="meta-info">
-					<div class="meta-info-time">14 minute(s) ago</div>0 comment(s)
-				</div>
-			</div>
-		</div>
-		<div class="feel" data-id="37">
-			<div class="feel-body">
-				<img src="https://api.adorable.io/avatars/50/2017-06-08 16:55:27.png">
-				<b>Anonymous</b> is feeling <span class="feel-txt" style="cursor: pointer;">good</span>
-				<div class="meta-info">
-					<div class="meta-info-time">14 minute(s) ago</div>0 comment(s)
-				</div>
-			</div>
-		</div>
-		<div class="feel" data-id="38">
-			<div class="feel-body">
-				<img src="https://api.adorable.io/avatars/50/2017-06-08 16:55:27.png">
-				<b>Anonymous</b> is feeling <span class="feel-txt" style="cursor: pointer;">good</span>
-				<div class="meta-info">
-					<div class="meta-info-time">14 minute(s) ago</div>0 comment(s)
-				</div>
-			</div>
-		</div>
-		<div class="feel" data-id="39">
-			<div class="feel-body">
-				<img src="https://api.adorable.io/avatars/50/2017-06-08 16:55:27.png">
-				<b>Anonymous</b> is feeling <span class="feel-txt" style="cursor: pointer;">good</span>
-				<div class="meta-info">
-					<div class="meta-info-time">14 minute(s) ago</div>0 comment(s)
-				</div>
-			</div>
-		</div>
+		<script type="text/javascript">
+			var ftxt = $(".feel-txt").text(); 
+			var request = $.ajax({
+				url: "sys.php",
+				method: "POST",
+				data: { feel : ftxt },
+				dataType: "html"
+			});
+			 
+			request.done(function( list ) {
+				$(".related-container").html(list);		
+			});
+			 
+			request.fail(function( jqXHR, textStatus ) {
+				console.log("Failed to load related feelings");
+			});
+		</script>
+		<span>Loading...</span>
+		
 	</div>
 </div>
 
