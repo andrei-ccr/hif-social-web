@@ -2,9 +2,12 @@ $(document).ready(function() {
 	
 	if(IsDiscussionPage()) {
 		// If the current page is the discussion page
-		$(".feel").css("cursor", "auto");
-		$(".feel").hover(function() { $(this).css("border-color", "rgba(0,0,0,0.2)"); });
-		$(".feel-txt").css("cursor", "pointer");
+		if($(".feel").hasClass("feel-related") === true) {
+			$(this).css("cursor", "auto");
+			$(this).hover(function() { $(this).css("border-color", "rgba(0,0,0,0.2)"); });
+			$(".feel-txt").css("cursor", "pointer");
+		}
+		
 	}
 	
 	$(document).on('click', function() {

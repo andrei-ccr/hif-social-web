@@ -37,6 +37,15 @@
 	}
 }
 
+@media screen and (min-width: 1270px) {
+	body .feelings-container .feel {
+		display: inline-block;
+		width: 39%;
+		margin: 16px 59px;
+	}
+	
+}
+
 * {
 	font-family: "Raleway", sans-serif;
 	margin: 0;
@@ -46,12 +55,12 @@
 .container {
 	margin: 40px auto;
 	text-align: center;
-	width:80%;
+	width:90%;
 }
 
 #feeling-insert {
 	border: 1px solid #222; 
-	width:80%; 
+	width:60%; 
 	padding:7px; 
 	font-size:20px;
 	padding-right: 55px;
@@ -90,7 +99,7 @@
 }
 
 #suggestion-container {
-	width: 80%; 
+	width: 60%; 
 	padding: 10px 0px;
 	padding-right: 62px;
 	background-color: rgba(0,0,0,0); 
@@ -126,10 +135,12 @@
 
 .feelings-container {
 	margin: 80px auto;
+	text-align:center;
 }
 
 .f-c-discussion {
 	margin-top: 20px;
+	display: block;
 }
 
 .feelings-container h2 {
@@ -153,6 +164,7 @@
     font-size: 16px;
     text-align: left;
     cursor: pointer;
+    
 }
 
 .feelings-container .feel:hover {
@@ -191,10 +203,12 @@
 /* ========================================  DISCUSSION PAGE =========================================== */
 
 .discussion-container {
-	margin: 40px auto;
+	margin: 40px 40px;
 	padding: 5px;
-	width: 80%;
+	width: 50%;
 	text-align: left;
+	display: inline-block;
+	vertical-align: top;
 }
 
 .discussion-container .comment {
@@ -237,10 +251,10 @@
 }
 
 .discussion-container #comment-insert {
-	width: 97%; 
+	width: 87%; 
 	resize: vertical; 
 	height:50px; 
-	display:inline-block; 
+	display:block; 
 	letter-spacing: 1px; 
 	line-height:20px; 
 	padding: 3px 7px;
@@ -273,4 +287,51 @@
 }
 .discussion-container #comment-submit:active{
 	border-color: #007700;
+}
+
+.related-container {
+	width:40%;
+	display:inline-block;
+}
+.related-container .feel {
+	width: 90%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-left: 0;
+    border-right: 0;
+    margin: 16px auto;
+    font-size: 16px;
+    text-align: left;
+    cursor: pointer;
+    
+}
+
+.related-container .feel:hover {
+	border-color: rgba(0,200,0,0.8);
+}
+
+.related-container .feel .feel-body {
+	padding: 10px;
+}
+
+.related-container .feel .feel-body .meta-info {
+	font-size: 12px; 
+	display: block; 
+	text-align:right; 
+	color: gray;
+}
+
+.related-container .feel .feel-body .meta-info .meta-info-time{
+	margin: 0px 15px; 
+	display:inline-block;
+}
+
+.related-container .feel .feel-body span:hover {
+	text-decoration: underline;
+	
+}
+.related-container .feel .feel-body img {
+	margin: 4px 15px 5px 5px;
+	vertical-align: middle;
+	width: 42px;
+	border: 1px solid rgba(0,0,0,0.7);
 }

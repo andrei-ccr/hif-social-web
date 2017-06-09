@@ -43,6 +43,45 @@
 			echo '</div>';
 		}
 	?>
+	<div class="related-container">
+		<h3>Related Feelings</h3>
+		<div class="feel feel-related" data-id="36">
+			<div class="feel-body">
+				<img src="https://api.adorable.io/avatars/50/2017-06-08 16:55:27.png">
+				<b>Anonymous</b> is feeling <span class="feel-txt" style="cursor: pointer;">good</span>
+				<div class="meta-info">
+					<div class="meta-info-time">14 minute(s) ago</div>0 comment(s)
+				</div>
+			</div>
+		</div>
+		<div class="feel" data-id="37">
+			<div class="feel-body">
+				<img src="https://api.adorable.io/avatars/50/2017-06-08 16:55:27.png">
+				<b>Anonymous</b> is feeling <span class="feel-txt" style="cursor: pointer;">good</span>
+				<div class="meta-info">
+					<div class="meta-info-time">14 minute(s) ago</div>0 comment(s)
+				</div>
+			</div>
+		</div>
+		<div class="feel" data-id="38">
+			<div class="feel-body">
+				<img src="https://api.adorable.io/avatars/50/2017-06-08 16:55:27.png">
+				<b>Anonymous</b> is feeling <span class="feel-txt" style="cursor: pointer;">good</span>
+				<div class="meta-info">
+					<div class="meta-info-time">14 minute(s) ago</div>0 comment(s)
+				</div>
+			</div>
+		</div>
+		<div class="feel" data-id="39">
+			<div class="feel-body">
+				<img src="https://api.adorable.io/avatars/50/2017-06-08 16:55:27.png">
+				<b>Anonymous</b> is feeling <span class="feel-txt" style="cursor: pointer;">good</span>
+				<div class="meta-info">
+					<div class="meta-info-time">14 minute(s) ago</div>0 comment(s)
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 </body>
