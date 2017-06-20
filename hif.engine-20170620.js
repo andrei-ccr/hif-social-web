@@ -3,12 +3,12 @@ function IsDiscussionPage() {
 	else return false;
 }
 
-function GetRelatedFeelings(ftxt) {
+function GetRelatedFeelings(fid) {
 	if(!IsDiscussionPage()) {
 		var request = $.ajax({
 			url: "sys.php",
 			method: "POST",
-			data: { feel : ftxt },
+			data: { feeling_id : fid },
 			dataType: "html"
 		});
 		 
@@ -30,7 +30,7 @@ function ProccessComment()  {
 	var comment = $('#comment-insert').val().trim();
 	if(!comment || 0 === comment.length) { $('#comment.insert').css("border-color", "red"); }
 	else {
-		var fid = $('.feel').data("id"); //There will be only 1 feel so it's safe to do this, but should find a better way.
+		var fid = $('.nfeel').data("id"); //There will be only 1 feel so it's safe to do this, but should find a better way.
 		var request = $.ajax({
 			url: "sys.php",
 			method: "POST",

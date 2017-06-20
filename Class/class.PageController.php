@@ -1,8 +1,25 @@
 <?php
 	require_once("class.Feeling.php");
 	require_once("class.Comment.php");
+	require_once("Emoticons.php");
 	
 	class PageController {
+		function parseEmoticons($text) {
+			global $emoticon_list;
+			$ok = false;
+			while(!$ok) {
+				$ok = true;
+				foreach($emoticon_list as $e) {
+					if($pos = strpos($text, $e) !== false) {
+						$text = substr_replace($text, "<img src=\"/git/feels/emoticons/angry.png\" class=\"emoticon\">", $pos-1, strlen($e)); //Replace the emoticon.
+						$ok = false; //Restart testing
+						break;
+					}
+				}
+			}
+			return $text;
+		}
+
 		function GetTime($timestamp) {
 			$sec_elapsed = time() - strtotime($timestamp) + 3600; //Important: Time is reported by PHP with -1 hour on this server, so I add 1 hour to the elapsed time to fix this.
 			if($sec_elapsed >= (3600*24*25)) {
@@ -30,8 +47,9 @@
 			echo '
 				<div class="'.$c.'" data-id="'.$feeling->GetId().'">
 					<div class="feel-body">
-						<img src="https://api.adorable.io/avatars/50/'.$feeling->GetTime().'.png">
-						<b>'.$feeling->GetUser()->GetUsername().'</b> is feeling <span class="feel-txt">'.$feeling->GetFeel().'</span>
+						<img src="'.$feeling->GetUser()->GetProfilePic().'" class="pic">
+						<b>'.$feeling->GetUser()->GetUsername().'</b><span> is </span><span class="feel-txt">'.$feeling->GetFeel().'</span>
+						
 						<div class="meta-info">
 							<div class="meta-info-time">'. $this->GetTime($feeling->GetTime()) .'</div>'. $feeling->CountComments().' comment(s)
 						</div>
@@ -75,7 +93,7 @@
 				foreach($comments as $c) {
 					echo '
 						<div class="comment">
-							<img src="https://api.adorable.io/avatars/40/'. $c->GetTime() .'.png">
+							<img src="https://api.adorable.io/avatars/40/'. $c->GetTime() .'.png" class="pic">
 							<span class="username">'.$c->GetUser()->GetUsername().'</span> <span class="timep">'.$this->GetTime($c->GetTime()).'</span>
 							<p>'.$c->GetComment().'</p>
 						</div>';

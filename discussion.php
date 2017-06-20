@@ -48,11 +48,11 @@
 	?>
 	<div class="related-container">
 		<script type="text/javascript">
-			var ftxt = $(".feel-txt").text(); 
+			var fid = $(".nfeel").data("id"); 
 			var request = $.ajax({
 				url: "sys.php",
 				method: "POST",
-				data: { feel : ftxt },
+				data: { feeling_id : fid },
 				dataType: "html"
 			});
 			 

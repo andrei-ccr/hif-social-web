@@ -1,6 +1,7 @@
 <?php
 	require_once("class.User.php");
 	require_once("class.AnonymousUser.php");
+	require_once("Emoticons.php");
 	
 	define("ERR_INVALID_USERNAME", -1);
 	define("ERR_INVALID_PASSWORD", -2);
@@ -28,6 +29,51 @@
 			$this->connection = null;
 		}
 		
+		protected function startsWith($haystack, $needle)
+		{
+		     $length = strlen($needle);
+		     return (substr($haystack, 0, $length) === $needle);
+		}
+
+		//An emoticon is of form [(emoticon)]
+		protected function stripEmoticons($text) {
+			global $emoticon_list;
+			foreach($emoticon_list as $e) {
+				$text = str_replace($e, "" , $text);
+			}
+			return $text;
+		}
+
+		protected function hasEmoticons($text) {
+			global $emoticon_list;
+			foreach($emoticon_list as $e) {
+				if(strpos($text, $e) !== false) return true;
+			}
+
+			return false;
+		}
+
+		protected function getEmoticons($text) {
+			global $emoticon_list;
+			$emoticons_order = array();
+
+			//This should be optimized. Current complexity is O(n^2)
+			$ok = false;
+			while(!$ok) {
+				$ok = true;
+				foreach($emoticon_list as $e) {
+					if($pos = strpos($text, $e) !== false) {
+						array_push($emoticons_order, $e); //Place the emoticon in an array
+						$text = substr_replace($text, "", $pos, strlen($e)); //Remove the emoticon so it won't be tested again
+						$ok = false; //Restart testing
+						break;
+					}
+				}
+			}
+			$text = implode(" ", $emoticons_order);
+			return $text;
+		}
+
 		public function IsLoggedIn() {
 			if($this->loggedin) {
 				return $this->user;
@@ -103,9 +149,10 @@
 			}
 
 			$p_hash = password_hash($password, PASSWORD_BCRYPT);
+			$ppic = "https://api.adorable.io/avatars/50/".md5(uniqid($your_user_login, true)).".png";
 
-			$ps = $this->connection->prepare("INSERT INTO users(username, pass, email) VALUES(:username, :password, :email)");
-			$ok = $ps->execute(array(":username"=>$username, ":password"=>$p_hash, ":email"=>$email));
+			$ps = $this->connection->prepare("INSERT INTO users(username, pass, email, profile_pic) VALUES(:username, :password, :email, :ppic)");
+			$ok = $ps->execute(array(":username"=>$username, ":password"=>$p_hash, ":email"=>$email, ":ppic"=>$ppic));
 			if($ok) {
 				return new User($this->connection->lastInsertId(), $username, $password, $email);
 			} else {

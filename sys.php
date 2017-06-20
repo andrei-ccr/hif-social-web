@@ -15,7 +15,7 @@
 		$pc->ShowSuggestions($s);
 	}
 	else if(isset($_POST['retr'])) {		//Retrieves the latest feelers and displays them
-		$f = $fc->GetLatestFeelings(6);
+		$f = $fc->GetLatestFeelings(32);
 		$pc->ShowLatestFeelings($f);
 	} 
 	else if(isset($_POST['insert'])) {		//Adds a new feeling and echoes all related feelings
@@ -27,9 +27,12 @@
 		$res = $cc->InsertComment($_POST['insert_com'], $_POST['feel_id']);
 		if(!$res) echo "Com Ins Err";
 	}
-	else if(isset($_POST['feel'])) {    //Retrieves feelings related to the specified feel
-		$fels = $fc->GetRelatedFeelings($fc->GetFeelId($_POST['feel']));
-		echo "<h3>Similar Feels &bull; ".count($fels)."</h3>";
+	else if(isset($_POST['feeling_id'])) {    //Retrieves feelings related to the specified feel
+		$fels = $fc->GetRelatedFeelings($_POST['feeling_id']);
+		if(count($fels) != 0) {
+			$title = "<h3>Similar Feels &bull; " . count($fels) . "</h3>";
+			echo $title;
+		}
 		$pc->ShowFeelings($fels);
 	}
 ?>

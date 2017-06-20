@@ -20,7 +20,7 @@
 
 <div class="container">
 	
-	<input type="text" id="feeling-insert" placeholder="I feel ..." autofocus/>
+	<input type="text" id="feeling-insert" placeholder="I am ..." autofocus/>
 	<button id="feeling-submit"></button>
 	
 	<div id="suggestion-container">
@@ -32,7 +32,7 @@
 	<div class="feelings-container">
 		<div class="f-latest-container">
 			<?php 
-				$feelings = $fc->GetLatestFeelings(8);
+				$feelings = $fc->GetLatestFeelings(32);
 				$pc->ShowLatestFeelings($feelings); 
 			?>
 		</div>

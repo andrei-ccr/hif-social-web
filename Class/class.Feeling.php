@@ -5,13 +5,18 @@
 		private $user = null;
 		private $dtime = "";
 		private $nr_comments = 0;
+		private $emoticons = "";
 		
-		function __construct($id, $feel, $user, $time, $nr_comments) {
+		function __construct($id, $feel, $user, $time, $nr_comments, $emoticons="") {
 			$this->id = $id;
 			$this->feel = $feel;
 			$this->user = $user;
 			$this->dtime = $time;
 			$this->nr_comments = $nr_comments;
+			if($emoticons == NULL) {
+				$this->emoticons = "";
+			} else 
+				$this->emoticons = $emoticons;
 		}
 		
 		public function CountComments() {
@@ -32,6 +37,10 @@
 		
 		public function GetTime() {
 			return $this->dtime;
+		}
+
+		public function GetEmoticons() {
+			return $this->emoticons;
 		}
 	}
 ?>

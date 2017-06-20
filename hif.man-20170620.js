@@ -41,15 +41,16 @@ $(document).ready(function() {
 	
 	//Clicking on a feeling
 	$('.feelings-container').on('click', '.feel', function(e) {
-		if(!IsDiscussionPage()) {
-			window.location.href = "discussion.php?id=" + $(this).data("id"); 
-		}
+		
+		window.location.href = "discussion.php?id=" + $(this).data("id"); 
+		
 	});
 	
 	//Clicking on a feel
 	$('.feelings-container').on('click', '.feel-txt', function(e) {
 		e.stopPropagation();
-		GetRelatedFeelings($(this).text());
+		GetRelatedFeelings($(this).closest(".feel").data("id"));
+
 	});
 	
 	//Clicking on submit button for feelings

@@ -42,10 +42,10 @@
 	}
 }
 
-@media screen and (min-width: 1100px) {
+@media screen and (min-width: 1000px) {
 	body .feelings-container .feel {
 		display: inline-block;
-		width: 39%;
+		width: 33%;
 		margin: 16px 55px;
 	}
 	
@@ -176,7 +176,7 @@ html {
 }
 
 .feelings-container .feel {
-	width: 60%;
+	width: 40%;
     border: 1px solid rgba(0,0,0,0.1);
     border-left: 0;
     border-right: 0;
@@ -210,10 +210,10 @@ html {
 	text-decoration: underline;
 	
 }
-.feelings-container .feel .feel-body img {
+.feelings-container .feel .feel-body img.pic {
 	margin: 4px 10px 5px 5px;
 	vertical-align: middle;
-	width: 42px;
+	width: 32px;
 	border: 1px solid rgba(0,0,0,0.7);
 }
 
@@ -222,8 +222,9 @@ html {
 /* ========================================  DISCUSSION PAGE =========================================== */
 
 .nfeel {
-	width: 60%;
+	width: 40%;
     border: 1px solid rgba(0,0,0,0.2);
+    border-top: 0;
     border-left: 0;
     border-right: 0;
     margin: 16px auto;
@@ -252,7 +253,7 @@ html {
 	
 }
 
-.nfeel .feel-body img {
+.nfeel .feel-body img.pic {
 	margin: 4px 10px 5px 5px;
 	vertical-align: middle;
 	width: 35px;
@@ -261,9 +262,9 @@ html {
 
 
 .discussion-container {
-	margin: 40px 0px;
+	margin: 40px 170px 0px 0px;
 	padding: 0px;
-	width: 60%;
+	width: 50%;
 	text-align: left;
 	display: inline-block;
 	vertical-align: top;
@@ -318,21 +319,21 @@ html {
 	letter-spacing: 1px; 
 	line-height:20px; 
 	padding: 3px 7px;
-	border-color: #777;
+	border-color: #CCC;
 }
 
 .discussion-container #comment-insert:focus {
-	outline-color: #00DD00;
+	outline-color: rgba(0,244,0,0.5);
 }
 
 
 .discussion-container #comment-submit {
 	font-weight: bold; 
-	padding:10px 15px; 
+	padding:8px 15px; 
 	vertical-align: middle; 
 	background-color: rgba(0,0,0,0); 
 	border: 1px solid rgba(0,0,0,0.2); 
-	font-size: 14px;
+	font-size: 12px;
 	margin-top: 8px; margin-bottom: 15px;
 	color: #222;
 }
@@ -352,7 +353,7 @@ html {
 
 
 .related-container {
-	width:39%;
+	width:30%;
 	display:inline-block;
 }
 .related-container .feel {
@@ -391,10 +392,10 @@ html {
 	text-decoration: underline;
 	
 }
-.related-container .feel .feel-body img {
+.related-container .feel .feel-body img.pic {
 	margin: 4px 10px 5px 5px;
 	vertical-align: middle;
-	width: 42px;
+	width: 32px;
 	border: 1px solid rgba(0,0,0,0.7);
 }
 
@@ -434,4 +435,15 @@ html {
 #header-acc-container .header-btn:active {
 	background-color: rgba(230,230,230,0.7);
 
+}
+
+
+
+body img.emoticon {
+	width:30px; 
+	height: 30px; 
+	border:0; 
+	position:relative; 
+	top: 9px; 
+	margin: 1px 3px;
 }
