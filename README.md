@@ -1,7 +1,11 @@
 # README #
 
-20/Jun/2017
-------------
-Made up my mind, I'm gonna write logs when I feel like it. Like now. Added an emoticons feature then changed my mind and disabled it. It's better this way.
-Site is looking good, but it needs more work regarding the design. Profile pics should also match everywhere if user is logged in. And finally, expand the feels database.
-That should be it. After that, the site can go in Beta. Need to find a good name though. 
+# How I Feel website
+
+On this website people can post about how they currently feel and can discuss with others about it. All posts are public.
+
+
+# 20/06/2017 update
+
+Account login/register page & discussion page where hidden from the front page. These features still work(can still be accessed via direct links), but 
+they are unstable and require more testing.
