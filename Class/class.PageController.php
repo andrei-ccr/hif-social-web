@@ -89,17 +89,19 @@
 		}
 		
 		public function ShowComments($comments) {
-			if(count($comments) > 0 && $comments!=null) {
-				foreach($comments as $c) {
-					echo '
-						<div class="comment">
-							<img src="https://api.adorable.io/avatars/40/'. $c->GetTime() .'.png" class="pic">
-							<span class="username">'.$c->GetUser()->GetUsername().'</span> <span class="timep">'.$this->GetTime($c->GetTime()).'</span>
-							<p>'.$c->GetComment().'</p>
-						</div>';
+			if($comments instanceof Countable) {
+				if(count($comments) > 0 && $comments!=null) {
+					foreach($comments as $c) {
+						echo '
+							<div class="comment">
+								<img src="https://api.adorable.io/avatars/40/'. $c->GetTime() .'.png" class="pic">
+								<span class="username">'.$c->GetUser()->GetUsername().'</span> <span class="timep">'.$this->GetTime($c->GetTime()).'</span>
+								<p>'.$c->GetComment().'</p>
+							</div>';
+					}
+				} else {
+					echo '<span style="display: block">No comments here so far :(</span>';
 				}
-			} else {
-				echo '<span style="display: block">No comments here so far :(</span>';
 			}
 		}
 	}

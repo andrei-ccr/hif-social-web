@@ -29,9 +29,12 @@
 	}
 	else if(isset($_POST['feeling_id'])) {    //Retrieves feelings related to the specified feel
 		$fels = $fc->GetRelatedFeelings($_POST['feeling_id']);
-		if(count($fels) != 0) {
-			$title = "<h3>Similar Feels &bull; " . count($fels) . "</h3>";
-			echo $title;
+		if($fels instanceof Countable) {
+			
+			if(count($fels) != 0) {
+				$title = "<h3>Similar Feels &bull; " . count($fels) . "</h3>";
+				echo $title;
+			}
 		}
 		$pc->ShowFeelings($fels);
 	}

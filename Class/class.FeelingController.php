@@ -123,7 +123,7 @@
 						u.user_id AS user_id, 
 						u.username AS user_name,
 						u.pass AS user_pass,
-						u.email AS user_email, u.profile_pic AS ppic
+						u.email AS user_email, u.profile_pic AS ppic,
 						fl.time AS time,
 						fl.emoticons AS emoticons
 				FROM feelings fl 
